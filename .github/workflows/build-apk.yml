@@ -18,7 +18,7 @@ jobs:
       - name: 2. Configurer Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: 'npm'
 
       - name: 3. Configurer Java 17 (Requis pour Android)
