@@ -21,11 +21,11 @@ jobs:
           node-version: 22
           cache: 'npm'
 
-      - name: 3. Configurer Java 17 (Requis pour Android)
+      - name: 3. Configurer Java 21 (Requis pour Android)
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       - name: 4. Installer les dépendances npm
         run: npm ci
