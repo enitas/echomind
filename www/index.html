@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Echo-Mind v2.3 | Chambre Polyphonique & Qwen-2.5</title>
+  <title>Echo-Mind v2.3.1 | Chambre Polyphonique Ultra-Stable</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
   <script>
@@ -35,11 +35,11 @@
   <header class="flex justify-between items-center max-w-5xl mx-auto w-full border-b border-slate-800 pb-3">
     <div class="flex items-center space-x-2">
       <div id="statusDot" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-indigo-400 font-mono">v2.3</span></h1>
+      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-indigo-400 font-mono">v2.3.1</span></h1>
     </div>
     <div class="flex items-center gap-2">
       <span id="engineBadge" class="text-[10px] px-3 py-1 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-500/30 glow-badge">
-        🏛️ Débat Polyphonique (Qwen 2.5)
+        🏛️ Débat Polyphonique Stable
       </span>
       <button id="exportBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
         📥 Export
@@ -53,13 +53,13 @@
     <!-- Statut Global -->
     <div class="text-center space-y-0.5">
       <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Conseil des 3 Sages</h2>
-      <p id="status" class="text-xs text-indigo-300/90">Initialisation du Moteur Qwen-2.5...</p>
+      <p id="status" class="text-xs text-indigo-300/90">Initialisation de l'IA locale...</p>
     </div>
 
     <!-- Grille Nébuleuse 3D + Saisie -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
       
-      <!-- Graphe 3D Sémantique -->
+      <!-- Graphe 3D -->
       <div class="bg-brand-card border border-slate-800/80 rounded-xl p-3 shadow-2xl flex flex-col items-center relative">
         <div class="w-full flex justify-between items-center mb-1.5 px-1">
           <span class="text-[10px] font-semibold text-indigo-300 uppercase tracking-widest flex items-center gap-1">🌌 Constellation Cognitive</span>
@@ -103,8 +103,8 @@
 
       <div id="chatContainer" class="h-44 sm:h-52 overflow-y-auto chat-scroll space-y-3 pr-1 text-xs sm:text-sm text-slate-200">
         <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-lg max-w-xl">
-          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Conseil des Sages v2.3</span>
-          Bonjour. Pose-nous une question ou soumets-nous un dilemme. Nos 3 perspectives locales (Analytique, Émotionnelle et Visionnaire) s'exprimeront pour t'éclairer.
+          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Conseil des Sages v2.3.1</span>
+          Bonjour. Pose-nous une question ou soumets-nous un dilemme. Les 3 perspectives locales (Analytique, Émotionnelle et Visionnaire) s'exprimeront en français.
         </div>
       </div>
 
@@ -138,10 +138,10 @@
   </div>
 
   <footer class="text-center text-[10px] text-slate-600 max-w-5xl mx-auto w-full pt-1.5 border-t border-slate-900">
-    Echo-Mind Engine v2.3 — Qwen 2.5 Local & Débat Polyphonique.
+    Echo-Mind Engine v2.3.1 — Débat Polyphonique Souverain.
   </footer>
 
-  <!-- Script Logique Locale v2.3 : IndexedDB + Whisper FR + Multi-Agent Qwen 2.5 -->
+  <!-- Script Logique Locale : IndexedDB + Whisper FR + WebLLM Llama-3.2 / Phi-3 -->
   <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
     import * as webllm from "https://esm.run/@mlc-ai/web-llm";
@@ -401,27 +401,28 @@
       }
     });
 
-    // --- 5. Moteur WebLLM Qwen 2.5 (Superieur à Phi-3 en français) ---
-    const SELECTED_MODEL = "Qwen2.5-3B-Instruct-q4f16_1-MLC";
+    // --- 5. WebLLM Ultra-Stable (Llama-3.2 / Phi-3) ---
+    // Modèle stable empêchant la génération de texte bruité/chinois
+    const SELECTED_MODEL = "Llama-3.2-3B-Instruct-q4f16_1-MLC";
     let engine = null;
     const statusText = document.getElementById('status');
 
     async function initLocalAI() {
-      statusText.textContent = "Chargement du moteur Qwen 2.5...";
+      statusText.textContent = "Initialisation IA Ultra-Stable...";
       try {
         engine = await webllm.CreateMLCEngine(SELECTED_MODEL, {
           initProgressCallback: (report) => {
-            statusText.textContent = `Qwen 2.5: ${report.text}`;
+            statusText.textContent = `IA: ${report.text}`;
           }
         });
-        statusText.textContent = "Conseil des Sages prêt (Qwen 2.5) 🏛️";
+        statusText.textContent = "Conseil des Sages prêt 🏛️";
       } catch (e) {
-        console.warn("Moteur Qwen non disponible, bascule sur Phi-3...", e);
+        console.warn("Bascule vers Phi-3...", e);
         try {
           engine = await webllm.CreateMLCEngine("Phi-3-mini-4k-instruct-q4f16_1-MLC", {
-            initProgressCallback: (report) => { statusText.textContent = `Phi-3 Fallback: ${report.text}`; }
+            initProgressCallback: (report) => { statusText.textContent = `IA: ${report.text}`; }
           });
-          statusText.textContent = "Conseil des Sages prêt (Phi-3) 🏛️";
+          statusText.textContent = "Conseil des Sages prêt 🏛️";
         } catch(err2) {
           statusText.textContent = "Erreur chargement IA";
         }
@@ -430,7 +431,7 @@
 
     initLocalAI();
 
-    // --- 6. Moteur Polyphonique (Les 3 Sages) ---
+    // --- 6. Moteur Polyphonique Cadre Strict ---
     const processBtn = document.getElementById('processBtn');
     const clearBtn = document.getElementById('clearBtn');
     const exportBtn = document.getElementById('exportBtn');
@@ -464,47 +465,41 @@
       chatInput.value = "";
 
       if (!engine) {
-        appendChatMessage("Conseil des Sages", "Le modèle se prépare encore en mémoire...", "text-amber-300 bg-slate-900 border-slate-800");
+        appendChatMessage("Conseil des Sages", "Le modèle s'initialise encore en mémoire...", "text-amber-300 bg-slate-900 border-slate-800");
         return;
       }
 
-      statusText.textContent = "Consultation du Conseil Polyphonique...";
+      statusText.textContent = "Consultation du Conseil...";
 
       try {
         const relevantMemories = await searchRelevantMemories(userMsg);
         let memoryContext = relevantMemories.length > 0
           ? "SOUVENIRS PERTINENTS EN MÉMOIRE :\n" + relevantMemories.map(m => `- "${m.transcript}"`).join("\n")
-          : "AUCUN SOUVENIR SPÉCIFIQUE EN MÉMOIRE.";
+          : "AUCUN SOUVENIR SPÉCIFIQUE DÉTECTÉ.";
 
-        // Prompt Polyphonique qui force l'IA à adopter les 3 rôles de façon structurée
-        const systemPrompt = `Tu es le Conseil Polyphonique d'Echo-Mind. Tu dois analyser la pensée de l'utilisateur sous TROIS angles distincts et complémentaires, puis fournir une synthèse.
+        const systemPrompt = `Tu es le Conseil Polyphonique d'Echo-Mind. Tu dois obligatoirement répondre EN FRANÇAIS uniquement.
+Donne des réponses courtes, claires et motivantes.
 
-CONSIGNES STRICTES :
-1. Réponds TOUJOURS en français.
-2. Structure impérativement ta réponse sous cette forme exacte :
+Formate impérativement ta réponse ainsi :
 
-🧐 **L'Analyste (Structure & Logique) :**
-[1 phrase d'analyse factuelle et pragmatique]
+🧐 **L'Analyste :** [1 phrase pragmatique]
 
-💚 **L'Empatique (Accueil & Énergie) :**
-[1 phrase d'empathie, de bienveillance et de soin de soi]
+💚 **L'Empatique :** [1 phrase bienveillante]
 
-🚀 **Le Visionnaire (Élévation & Dépassement) :**
-[1 phrase d'inspiration, de prise de hauteur et de conseil d'action]
+🚀 **Le Visionnaire :** [1 phrase d'action/élévation]
 
-🏛️ **Synthèse d'Élévation :**
-[1 question socratique finale pour débloquer la situation]
+🏛️ **Synthèse :** [1 question socratique finale]
 
-CONTEXTE DU VÉCU :
-${memoryContext}`;
+Mémoire disponible : ${memoryContext}`;
 
         const reply = await engine.chat.completions.create({ 
           messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: userMsg }
           ], 
-          max_tokens: 220,
-          temperature: 0.6 
+          max_tokens: 180,
+          temperature: 0.4, // Température basse pour éviter le moindre bruit incohérent
+          top_p: 0.85
         });
 
         const aiResponse = reply.choices[0].message.content;
@@ -520,7 +515,6 @@ ${memoryContext}`;
       const div = document.createElement('div');
       div.className = `p-3 border rounded-xl max-w-2xl ${styleClass}`;
       
-      // Formatage propre des sauts de ligne pour les 3 Sages
       const formattedText = text.replace(/\n/g, '<br>');
       div.innerHTML = `<span class="text-[10px] font-bold block mb-1 uppercase tracking-wider text-indigo-400">${sender}</span><div class="text-xs sm:text-sm leading-relaxed">${formattedText}</div>`;
       
@@ -534,7 +528,7 @@ ${memoryContext}`;
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(records, null, 2));
       const a = document.createElement('a');
       a.href = dataStr;
-      a.download = `echomind_polyphonie_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `echomind_vault_v2.3.1_${new Date().toISOString().slice(0,10)}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
