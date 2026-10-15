@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Echo-Mind | Local-First & Phi-3 Socratique</title>
+  <title>Echo-Mind | Nébuleuse 3D Premium & Phi-3</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
   <script>
@@ -12,16 +12,22 @@
       theme: {
         extend: {
           colors: {
-            brand: { bg: '#0a0d14', card: '#121824', accent: '#6366f1', glow: '#818cf8' }
+            brand: { bg: '#030712', card: '#0f172a', accent: '#6366f1', glow: '#818cf8' }
           }
         }
       }
     }
   </script>
   <style>
-    #graphContainer { width: 100%; height: 240px; position: relative; overflow: hidden; border-radius: 0.75rem; }
+    #graphContainer { width: 100%; height: 280px; position: relative; overflow: hidden; border-radius: 0.75rem; box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.15); }
     .chat-scroll::-webkit-scrollbar { width: 4px; }
     .chat-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    /* Animation de lueur pour les badges */
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+    .glow-badge { animation: pulse-glow 3s infinite ease-in-out; }
   </style>
 </head>
 <body class="bg-brand-bg text-slate-100 min-h-screen flex flex-col justify-between font-sans p-3 sm:p-5">
@@ -33,8 +39,8 @@
       <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND</h1>
     </div>
     <div class="flex items-center gap-2">
-      <span id="engineBadge" class="text-[10px] px-2.5 py-1 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">
-        🛡️ Phi-3 Local + Whisper
+      <span id="engineBadge" class="text-[10px] px-3 py-1 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-700/50 glow-badge">
+        ✨ Nébuleuse 3D Interactive
       </span>
       <button id="exportBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
         📥 Export
@@ -54,20 +60,21 @@
     <!-- Grille Nébuleuse 3D + Saisie -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
       
-      <!-- Graphe 3D -->
-      <div class="bg-brand-card border border-slate-800 rounded-xl p-3 shadow-xl flex flex-col items-center">
+      <!-- Graphe 3D Premium -->
+      <div class="bg-brand-card border border-slate-800/80 rounded-xl p-3 shadow-2xl flex flex-col items-center relative">
         <div class="w-full flex justify-between items-center mb-1.5 px-1">
-          <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Nébuleuse 3D</span>
+          <span class="text-[10px] font-semibold text-indigo-300 uppercase tracking-widest flex items-center gap-1">🌌 Nébuleuse Cognitive</span>
           <button id="refreshGraphBtn" class="text-[10px] text-indigo-400 hover:text-indigo-300 underline cursor-pointer">Actualiser</button>
         </div>
         <div id="graphContainer" class="bg-slate-950 border border-slate-900"></div>
+        <span class="absolute bottom-3 left-4 text-[9px] text-slate-500 pointer-events-none">💡 Clique sur une bulle pour l'inspecter</span>
       </div>
 
       <!-- Saisie de Pensée & Whisper -->
-      <div class="bg-brand-card border border-slate-800 rounded-xl p-3.5 shadow-xl flex flex-col justify-between space-y-2.5">
+      <div class="bg-brand-card border border-slate-800/80 rounded-xl p-3.5 shadow-2xl flex flex-col justify-between space-y-2.5">
         <div>
           <div class="flex justify-between items-center mb-1">
-            <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">Ancrer une Pensée</span>
+            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Ancrer une Pensée</span>
             <span id="micStatus" class="text-[10px] text-indigo-400">Chargement Whisper...</span>
           </div>
           <textarea id="thoughtInput" placeholder="Écrivez ou dictez votre pensée..." class="w-full h-20 bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition resize-none chat-scroll"></textarea>
@@ -79,7 +86,7 @@
           </button>
           <div class="flex gap-2">
             <button id="clearBtn" class="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white transition cursor-pointer">Effacer</button>
-            <button id="processBtn" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg shadow transition cursor-pointer">
+            <button id="processBtn" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg shadow transition cursor-pointer">
               Ancrer 🧠
             </button>
           </div>
@@ -89,7 +96,7 @@
     </div>
 
     <!-- Miroir Socratique -->
-    <div class="w-full bg-brand-card border border-indigo-900/50 rounded-xl p-3.5 shadow-xl space-y-2.5">
+    <div class="w-full bg-brand-card border border-indigo-900/50 rounded-xl p-3.5 shadow-2xl space-y-2.5">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest">🏛️ Débat Socratique Local (Phi-3)</span>
         <span class="text-[10px] text-emerald-400">100% Hors-Ligne & Privé</span>
@@ -98,7 +105,7 @@
       <div id="chatContainer" class="h-36 sm:h-44 overflow-y-auto chat-scroll space-y-2.5 pr-1 text-xs sm:text-sm text-slate-200">
         <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-lg max-w-xl">
           <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Jumeau Cognitif</span>
-          Bonjour. Je suis ton miroir socratique local propulsé par Phi-3. Le modèle LLM se télécharge/s'initialise au premier lancement. Écris ou dicte une pensée pour commencer.
+          Bonjour. Je suis ton miroir socratique. Clique sur une bulle de la nébuleuse pour inspecter tes pensées passées ou écris m'en une nouvelle.
         </div>
       </div>
 
@@ -112,11 +119,30 @@
 
   </main>
 
+  <!-- Fenêtre Modale d'Inspection de Nœud (Nébuleuse 3D) -->
+  <div id="thoughtModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-brand-card border border-indigo-500/50 rounded-2xl max-w-lg w-full p-5 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div>
+          <span id="modalNodeId" class="text-xs font-bold text-indigo-400 uppercase tracking-widest block">Nœud Cognitif</span>
+          <span id="modalTimestamp" class="text-[10px] text-slate-400"></span>
+        </div>
+        <button id="closeModalBtn" class="text-slate-400 hover:text-white text-xs px-2.5 py-1 bg-slate-800 rounded-lg cursor-pointer">✕ Fermer</button>
+      </div>
+      <div id="modalTranscript" class="text-xs sm:text-sm text-slate-200 leading-relaxed bg-slate-900 p-3.5 rounded-xl border border-slate-800 max-h-48 overflow-y-auto"></div>
+      <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+        <button id="modalDiscussBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg transition cursor-pointer flex items-center gap-1.5">
+          Discuter de cette pensée avec le Jumeau 💬
+        </button>
+      </div>
+    </div>
+  </div>
+
   <footer class="text-center text-[10px] text-slate-600 max-w-5xl mx-auto w-full pt-1.5 border-t border-slate-900">
-    Echo-Mind Engine v1.1 — Architecture Souveraine & Local-First.
+    Echo-Mind Engine v1.3 — Nébuleuse 3D Interactive & Architecture Souveraine.
   </footer>
 
-  <!-- Script Logique Locale : IndexedDB + Whisper + WebLLM -->
+  <!-- Script Logique Locale : IndexedDB + Whisper FR + WebLLM + Graph 3D Interactif -->
   <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
     import * as webllm from "https://esm.run/@mlc-ai/web-llm";
@@ -167,8 +193,9 @@
       });
     }
 
-    // --- 2. Graphe 3D ---
+    // --- 2. Graphe 3D Premium & Interactif ---
     let graphInstance = null;
+    let selectedThoughtForModal = null;
 
     async function render3DGraph() {
       const records = await getAllFromVault();
@@ -177,13 +204,25 @@
 
       records.forEach((record, recIndex) => {
         const thoughtNodeId = `Pensée #${recIndex + 1}`;
-        nodesMap.set(thoughtNodeId, { id: thoughtNodeId, group: 'thought', val: 5 });
+        nodesMap.set(thoughtNodeId, { 
+          id: thoughtNodeId, 
+          group: 'thought', 
+          val: 7, 
+          transcript: record.transcript,
+          timestamp: record.timestamp 
+        });
 
         if (record.nodes && Array.isArray(record.nodes)) {
           record.nodes.forEach(concept => {
             const cleanConcept = `#${concept.trim()}`;
             if (!nodesMap.has(cleanConcept)) {
-              nodesMap.set(cleanConcept, { id: cleanConcept, group: 'concept', val: 3 });
+              nodesMap.set(cleanConcept, { 
+                id: cleanConcept, 
+                group: 'concept', 
+                val: 4, 
+                transcript: `Concept extrait de la pensée #${recIndex + 1}: "${record.transcript.slice(0, 80)}..."`,
+                timestamp: record.timestamp 
+              });
             }
             links.push({ source: thoughtNodeId, target: cleanConcept });
           });
@@ -200,16 +239,56 @@
         try {
           graphInstance = ForceGraph3D()(container)
             .backgroundColor('#020617')
-            .nodeLabel('id')
+            .nodeLabel(node => `<div style="background:rgba(15,23,42,0.95); padding:8px 12px; border-radius:8px; border:1px solid #6366f1; color:#f8fafc; font-family:sans-serif; font-size:11px; box-shadow:0 4px 12px rgba(0,0,0,0.5);"><strong>${node.id}</strong><br><span style="color:#94a3b8; font-size:9px;">Clique pour inspecter</span></div>`)
             .nodeColor(node => node.group === 'thought' ? '#818cf8' : '#34d399')
-            .nodeVal('val')
-            .linkColor(() => 'rgba(99, 102, 241, 0.2)');
+            .nodeVal(node => node.val)
+            .nodeResolution(32)
+            .linkWidth(2)
+            .linkColor(() => 'rgba(99, 102, 241, 0.35)')
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.004)
+            .linkDirectionalParticleWidth(2.5)
+            .onNodeClick(node => {
+              openThoughtModal(node);
+            });
+
+          // Rotation automatique douce de la caméra pour un effet spatial vivant
+          const controls = graphInstance.controls();
+          controls.autoRotate = true;
+          controls.autoRotateSpeed = 0.6;
         } catch(e) { console.warn("Erreur WebGL Graph:", e); }
       }
       if (graphInstance) graphInstance.graphData(graphData);
     }
 
-    // --- 3. Whisper Local (Transformers.js) ---
+    // Gestion de la modale d'inspection
+    const thoughtModal = document.getElementById('thoughtModal');
+    const modalNodeId = document.getElementById('modalNodeId');
+    const modalTimestamp = document.getElementById('modalTimestamp');
+    const modalTranscript = document.getElementById('modalTranscript');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalDiscussBtn = document.getElementById('modalDiscussBtn');
+
+    function openThoughtModal(node) {
+      selectedThoughtForModal = node.transcript;
+      modalNodeId.textContent = node.id;
+      modalTimestamp.textContent = node.timestamp ? `Enregistré le : ${new Date(node.timestamp).toLocaleString()}` : '';
+      modalTranscript.textContent = node.transcript || "Aucun contenu textuel disponible.";
+      thoughtModal.classList.remove('hidden');
+    }
+
+    closeModalBtn.addEventListener('click', () => { thoughtModal.classList.add('hidden'); });
+    thoughtModal.addEventListener('click', (e) => { if (e.target === thoughtModal) thoughtModal.classList.add('hidden'); });
+
+    modalDiscussBtn.addEventListener('click', () => {
+      if (selectedThoughtForModal) {
+        thoughtModal.classList.add('hidden');
+        chatInput.value = `Au sujet de cette pensée : "${selectedThoughtForModal}"`;
+        chatInput.focus();
+      }
+    });
+
+    // --- 3. Whisper Multilingue (Français) ---
     let transcriber = null;
     const micStatus = document.getElementById('micStatus');
     const recordBtn = document.getElementById('recordBtn');
@@ -217,10 +296,10 @@
     const thoughtInput = document.getElementById('thoughtInput');
 
     async function initWhisper() {
-      micStatus.textContent = "Chargement Whisper...";
+      micStatus.textContent = "Chargement Whisper FR...";
       try {
         transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-tiny');
-        micStatus.textContent = "Whisper prêt 🎙️";
+        micStatus.textContent = "Whisper FR prêt 🎙️";
       } catch (e) {
         console.warn("Erreur Whisper:", e);
         micStatus.textContent = "Mode texte uniquement";
@@ -248,14 +327,14 @@
           mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
 
           mediaRecorder.onstop = async () => {
-            micStatus.textContent = "Transcription locale...";
+            micStatus.textContent = "Transcription française...";
             const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
             const arrayBuffer = await audioBlob.arrayBuffer();
             const audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
             const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
             const audioData = audioBuffer.getChannelData(0);
 
-            const output = await transcriber(audioData);
+            const output = await transcriber(audioData, { language: 'french', task: 'transcribe' });
             if (output && output.text) {
               thoughtInput.value += (thoughtInput.value ? " " : "") + output.text.trim();
             }
@@ -268,7 +347,7 @@
           recordBtn.classList.add('bg-rose-950', 'border-rose-800', 'text-rose-300');
           micStatus.textContent = "Enregistrement...";
         } catch (err) {
-          alert("Microphone inaccessible : Vérifiez les permissions de l'application Android dans les paramètres de votre téléphone. " + err.message);
+          alert("Microphone inaccessible : Vérifiez les permissions de l'application Android. " + err.message);
         }
       } else {
         mediaRecorder.stop();
@@ -284,17 +363,17 @@
     const statusText = document.getElementById('status');
 
     async function initLocalAI() {
-      statusText.textContent = "Chargement du modèle Phi-3 local...";
+      statusText.textContent = "Chargement Phi-3 (premier lancement)...";
       try {
         engine = await webllm.CreateMLCEngine(SELECTED_MODEL, {
           initProgressCallback: (report) => {
             statusText.textContent = `IA: ${report.text}`;
           }
         });
-        statusText.textContent = "Coffre-fort & IA prêts 🧠";
+        statusText.textContent = "Coffre-fort & Nébuleuse 3D prêts 🧠";
       } catch (e) {
         console.error("Erreur WebLLM:", e);
-        statusText.textContent = "Erreur chargement IA (Mode basique)";
+        statusText.textContent = "Erreur chargement IA";
       }
     }
 
@@ -325,7 +404,7 @@
       await render3DGraph();
 
       thoughtInput.value = "";
-      statusText.textContent = "Pensée ancrée dans le coffre local !";
+      statusText.textContent = "Pensée ancrée dans la nébuleuse !";
     }
 
     async function sendSocraticMessage() {
@@ -336,7 +415,7 @@
       chatInput.value = "";
 
       if (!engine) {
-        appendChatMessage("Jumeau Cognitif", "L'IA Phi-3 est encore en cours de chargement dans la mémoire du téléphone...", "text-amber-300 bg-slate-900 border-slate-800");
+        appendChatMessage("Jumeau Cognitif", "L'IA Phi-3 est encore en cours d'initialisation...", "text-amber-300 bg-slate-900 border-slate-800");
         return;
       }
 
@@ -346,12 +425,16 @@
         const messages = [
           { 
             role: "system", 
-            content: "Tu es le miroir socratique souverain d'Echo-Mind. Ton rôle est d'aider l'utilisateur à analyser ses doutes ou ses idées en posant une question pertinente, bienveillante et socratique. Sois concis (2 phrases max)." 
+            content: "Tu es le miroir socratique souverain d'Echo-Mind. Réponds TOUJOURS en français. Pose une unique question socratique courte, directe et percutante. Limite ta réponse à une seule phrase maximum." 
           },
           { role: "user", content: userMsg }
         ];
 
-        const reply = await engine.chat.completions.create({ messages });
+        const reply = await engine.chat.completions.create({ 
+          messages, 
+          max_tokens: 80,
+          temperature: 0.7 
+        });
         const aiResponse = reply.choices[0].message.content;
 
         appendChatMessage("Jumeau Cognitif", aiResponse, "text-emerald-300 bg-slate-900 border-slate-800");
