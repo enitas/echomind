@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Echo-Mind v2.3.1 | Chambre Polyphonique Ultra-Stable</title>
+  <title>Echo-Mind v2.3.2 | Guide Stable & Robuste</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
   <script>
@@ -35,11 +35,11 @@
   <header class="flex justify-between items-center max-w-5xl mx-auto w-full border-b border-slate-800 pb-3">
     <div class="flex items-center space-x-2">
       <div id="statusDot" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-indigo-400 font-mono">v2.3.1</span></h1>
+      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-indigo-400 font-mono">v2.3.2</span></h1>
     </div>
     <div class="flex items-center gap-2">
       <span id="engineBadge" class="text-[10px] px-3 py-1 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-500/30 glow-badge">
-        🏛️ Débat Polyphonique Stable
+        🛡️ Guide Stable
       </span>
       <button id="exportBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
         📥 Export
@@ -52,7 +52,7 @@
     
     <!-- Statut Global -->
     <div class="text-center space-y-0.5">
-      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Conseil des 3 Sages</h2>
+      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Élévation Personnelle</h2>
       <p id="status" class="text-xs text-indigo-300/90">Initialisation de l'IA locale...</p>
     </div>
 
@@ -94,24 +94,24 @@
 
     </div>
 
-    <!-- Miroir Polyphonique & Conseil des Sages -->
+    <!-- Miroir & Conseil -->
     <div class="w-full bg-brand-card border border-indigo-900/40 rounded-xl p-3.5 shadow-2xl space-y-2.5">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">🏛️ Chambre de Débat Polyphonique</span>
-        <span class="text-[10px] text-emerald-400">Analyste • Empathique • Visionnaire</span>
+        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">🏛️ Guide d'Élévation Souverain</span>
+        <span class="text-[10px] text-emerald-400">100% Hors-Ligne & Stable</span>
       </div>
 
       <div id="chatContainer" class="h-44 sm:h-52 overflow-y-auto chat-scroll space-y-3 pr-1 text-xs sm:text-sm text-slate-200">
         <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-lg max-w-xl">
-          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Conseil des Sages v2.3.1</span>
-          Bonjour. Pose-nous une question ou soumets-nous un dilemme. Les 3 perspectives locales (Analytique, Émotionnelle et Visionnaire) s'exprimeront en français.
+          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Local v2.3.2</span>
+          Bonjour. Pose-moi une question ou soumets-moi un dilemme. Je t'aiderai à y voir clair avec bienveillance et objectivité.
         </div>
       </div>
 
       <div class="flex gap-2 pt-1">
-        <input type="text" id="chatInput" placeholder="Pose ta question au Conseil..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+        <input type="text" id="chatInput" placeholder="Pose ta question au Guide..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition">
         <button id="sendChatBtn" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg transition cursor-pointer">
-          Consulter 🏛️
+          Échanger ✨
         </button>
       </div>
     </div>
@@ -131,17 +131,17 @@
       <div id="modalTranscript" class="text-xs sm:text-sm text-slate-200 leading-relaxed bg-slate-900 p-3.5 rounded-xl border border-slate-800 max-h-48 overflow-y-auto"></div>
       <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
         <button id="modalDiscussBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg transition cursor-pointer flex items-center gap-1.5">
-          Soumettre ce moment au Conseil 🏛️
+          Discuter de ce moment avec le Guide ✨
         </button>
       </div>
     </div>
   </div>
 
   <footer class="text-center text-[10px] text-slate-600 max-w-5xl mx-auto w-full pt-1.5 border-t border-slate-900">
-    Echo-Mind Engine v2.3.1 — Débat Polyphonique Souverain.
+    Echo-Mind Engine v2.3.2 — Stabilité et Clarté Cognitive.
   </footer>
 
-  <!-- Script Logique Locale : IndexedDB + Whisper FR + WebLLM Llama-3.2 / Phi-3 -->
+  <!-- Script Logique Locale v2.3.2 -->
   <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
     import * as webllm from "https://esm.run/@mlc-ai/web-llm";
@@ -323,7 +323,7 @@
     modalDiscussBtn.addEventListener('click', () => {
       if (selectedThoughtForModal) {
         thoughtModal.classList.add('hidden');
-        chatInput.value = `Soumets cette réflexion au Conseil : "${selectedThoughtForModal}"`;
+        chatInput.value = `Aide-moi à analyser cette réflexion : "${selectedThoughtForModal}"`;
         chatInput.focus();
       }
     });
@@ -401,28 +401,27 @@
       }
     });
 
-    // --- 5. WebLLM Ultra-Stable (Llama-3.2 / Phi-3) ---
-    // Modèle stable empêchant la génération de texte bruité/chinois
+    // --- 5. WebLLM Modèle Robuste ---
     const SELECTED_MODEL = "Llama-3.2-3B-Instruct-q4f16_1-MLC";
     let engine = null;
     const statusText = document.getElementById('status');
 
     async function initLocalAI() {
-      statusText.textContent = "Initialisation IA Ultra-Stable...";
+      statusText.textContent = "Initialisation IA Stable...";
       try {
         engine = await webllm.CreateMLCEngine(SELECTED_MODEL, {
           initProgressCallback: (report) => {
             statusText.textContent = `IA: ${report.text}`;
           }
         });
-        statusText.textContent = "Conseil des Sages prêt 🏛️";
+        statusText.textContent = "Guide d'élévation prêt 🌟";
       } catch (e) {
         console.warn("Bascule vers Phi-3...", e);
         try {
           engine = await webllm.CreateMLCEngine("Phi-3-mini-4k-instruct-q4f16_1-MLC", {
             initProgressCallback: (report) => { statusText.textContent = `IA: ${report.text}`; }
           });
-          statusText.textContent = "Conseil des Sages prêt 🏛️";
+          statusText.textContent = "Guide d'élévation prêt 🌟";
         } catch(err2) {
           statusText.textContent = "Erreur chargement IA";
         }
@@ -431,7 +430,7 @@
 
     initLocalAI();
 
-    // --- 6. Moteur Polyphonique Cadre Strict ---
+    // --- 6. Interface & Dialogue Stable ---
     const processBtn = document.getElementById('processBtn');
     const clearBtn = document.getElementById('clearBtn');
     const exportBtn = document.getElementById('exportBtn');
@@ -457,7 +456,7 @@
       statusText.textContent = "Pensée ancrée avec succès !";
     }
 
-    async function sendPolyphonicMessage() {
+    async function sendGuideMessage() {
       const userMsg = chatInput.value.trim();
       if (!userMsg) return;
 
@@ -465,49 +464,37 @@
       chatInput.value = "";
 
       if (!engine) {
-        appendChatMessage("Conseil des Sages", "Le modèle s'initialise encore en mémoire...", "text-amber-300 bg-slate-900 border-slate-800");
+        appendChatMessage("Guide Local", "Le modèle s'initialise encore en mémoire...", "text-amber-300 bg-slate-900 border-slate-800");
         return;
       }
 
-      statusText.textContent = "Consultation du Conseil...";
+      statusText.textContent = "Réflexion du Guide...";
 
       try {
         const relevantMemories = await searchRelevantMemories(userMsg);
         let memoryContext = relevantMemories.length > 0
-          ? "SOUVENIRS PERTINENTS EN MÉMOIRE :\n" + relevantMemories.map(m => `- "${m.transcript}"`).join("\n")
-          : "AUCUN SOUVENIR SPÉCIFIQUE DÉTECTÉ.";
+          ? "Souvenirs passés pertinents : " + relevantMemories.map(m => `"${m.transcript}"`).join("; ")
+          : "Aucun souvenir spécifique.";
 
-        const systemPrompt = `Tu es le Conseil Polyphonique d'Echo-Mind. Tu dois obligatoirement répondre EN FRANÇAIS uniquement.
-Donne des réponses courtes, claires et motivantes.
-
-Formate impérativement ta réponse ainsi :
-
-🧐 **L'Analyste :** [1 phrase pragmatique]
-
-💚 **L'Empatique :** [1 phrase bienveillante]
-
-🚀 **Le Visionnaire :** [1 phrase d'action/élévation]
-
-🏛️ **Synthèse :** [1 question socratique finale]
-
-Mémoire disponible : ${memoryContext}`;
+        // Prompt épuré et ultra-robuste pour éviter les glitches de tokens
+        const systemPrompt = `Tu es le guide d'élévation personnelle d'Echo-Mind. Tu réponds TOUJOURS en français avec bienveillance, clarté et concision (maximum 3 phrases). Aide l'utilisateur à positiver et à trouver une solution constructive. Contexte mémoriel : ${memoryContext}`;
 
         const reply = await engine.chat.completions.create({ 
           messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: userMsg }
           ], 
-          max_tokens: 180,
-          temperature: 0.4, // Température basse pour éviter le moindre bruit incohérent
-          top_p: 0.85
+          max_tokens: 120,
+          temperature: 0.6,
+          top_p: 0.9
         });
 
         const aiResponse = reply.choices[0].message.content;
-        appendChatMessage("Conseil des Sages", aiResponse, "text-slate-100 bg-slate-900 border-indigo-800/60 shadow-xl");
+        appendChatMessage("Guide Local", aiResponse, "text-slate-100 bg-slate-900 border-indigo-800/60 shadow-xl");
         statusText.textContent = "Prêt.";
       } catch (err) {
         console.error("Erreur génération IA:", err);
-        appendChatMessage("Conseil des Sages", "Erreur lors de la délibération du Conseil.", "text-rose-400 bg-slate-900 border-slate-800");
+        appendChatMessage("Guide Local", "Erreur lors de la génération.", "text-rose-400 bg-slate-900 border-slate-800");
       }
     }
 
@@ -528,7 +515,7 @@ Mémoire disponible : ${memoryContext}`;
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(records, null, 2));
       const a = document.createElement('a');
       a.href = dataStr;
-      a.download = `echomind_vault_v2.3.1_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `echomind_vault_v2.3.2_${new Date().toISOString().slice(0,10)}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -536,8 +523,8 @@ Mémoire disponible : ${memoryContext}`;
 
     processBtn.addEventListener('click', runAnalysisAndSave);
     refreshGraphBtn.addEventListener('click', render3DGraph);
-    sendChatBtn.addEventListener('click', sendPolyphonicMessage);
-    chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendPolyphonicMessage(); });
+    sendChatBtn.addEventListener('click', sendGuideMessage);
+    chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendGuideMessage(); });
     clearBtn.addEventListener('click', () => { thoughtInput.value = ""; });
 
     initSystem();
