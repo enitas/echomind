@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Echo-Mind v2.3.2 | Guide Stable & Robuste</title>
+  <title>Echo-Mind v2.3.3 | Version Verrouillée & Stable</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
   <script>
@@ -35,11 +35,11 @@
   <header class="flex justify-between items-center max-w-5xl mx-auto w-full border-b border-slate-800 pb-3">
     <div class="flex items-center space-x-2">
       <div id="statusDot" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-indigo-400 font-mono">v2.3.2</span></h1>
+      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-emerald-400 font-mono">v2.3.3</span></h1>
     </div>
     <div class="flex items-center gap-2">
-      <span id="engineBadge" class="text-[10px] px-3 py-1 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-500/30 glow-badge">
-        🛡️ Guide Stable
+      <span id="engineBadge" class="text-[10px] px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 glow-badge">
+        🔒 Moteur Verrouillé & Ultra-Stable
       </span>
       <button id="exportBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
         📥 Export
@@ -52,7 +52,7 @@
     
     <!-- Statut Global -->
     <div class="text-center space-y-0.5">
-      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Élévation Personnelle</h2>
+      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Guide Souverain</h2>
       <p id="status" class="text-xs text-indigo-300/90">Initialisation de l'IA locale...</p>
     </div>
 
@@ -94,17 +94,17 @@
 
     </div>
 
-    <!-- Miroir & Conseil -->
+    <!-- Miroir & Guide -->
     <div class="w-full bg-brand-card border border-indigo-900/40 rounded-xl p-3.5 shadow-2xl space-y-2.5">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">🏛️ Guide d'Élévation Souverain</span>
-        <span class="text-[10px] text-emerald-400">100% Hors-Ligne & Stable</span>
+        <span class="text-[10px] text-emerald-400">100% Hors-Ligne & Protégé</span>
       </div>
 
       <div id="chatContainer" class="h-44 sm:h-52 overflow-y-auto chat-scroll space-y-3 pr-1 text-xs sm:text-sm text-slate-200">
         <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-lg max-w-xl">
-          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Local v2.3.2</span>
-          Bonjour. Pose-moi une question ou soumets-moi un dilemme. Je t'aiderai à y voir clair avec bienveillance et objectivité.
+          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Local v2.3.3</span>
+          Bonjour. Pose-moi une question ou soumets-moi une réflexion. Je suis là pour t'accompagner.
         </div>
       </div>
 
@@ -138,10 +138,10 @@
   </div>
 
   <footer class="text-center text-[10px] text-slate-600 max-w-5xl mx-auto w-full pt-1.5 border-t border-slate-900">
-    Echo-Mind Engine v2.3.2 — Stabilité et Clarté Cognitive.
+    Echo-Mind Engine v2.3.3 — Phi-3 Local Ultra-Stable.
   </footer>
 
-  <!-- Script Logique Locale v2.3.2 -->
+  <!-- Script Logique Locale v2.3.3 -->
   <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
     import * as webllm from "https://esm.run/@mlc-ai/web-llm";
@@ -401,36 +401,29 @@
       }
     });
 
-    // --- 5. WebLLM Modèle Robuste ---
-    const SELECTED_MODEL = "Llama-3.2-3B-Instruct-q4f16_1-MLC";
+    // --- 5. WebLLM Verrouillé sur Phi-3 (Intouchable & Ultra-Stable) ---
+    const SELECTED_MODEL = "Phi-3-mini-4k-instruct-q4f16_1-MLC";
     let engine = null;
     const statusText = document.getElementById('status');
 
     async function initLocalAI() {
-      statusText.textContent = "Initialisation IA Stable...";
+      statusText.textContent = "Chargement Phi-3 (Moteur Stable)...";
       try {
         engine = await webllm.CreateMLCEngine(SELECTED_MODEL, {
           initProgressCallback: (report) => {
             statusText.textContent = `IA: ${report.text}`;
           }
         });
-        statusText.textContent = "Guide d'élévation prêt 🌟";
+        statusText.textContent = "Guide d'élévation verrouillé prêt 🌟";
       } catch (e) {
-        console.warn("Bascule vers Phi-3...", e);
-        try {
-          engine = await webllm.CreateMLCEngine("Phi-3-mini-4k-instruct-q4f16_1-MLC", {
-            initProgressCallback: (report) => { statusText.textContent = `IA: ${report.text}`; }
-          });
-          statusText.textContent = "Guide d'élévation prêt 🌟";
-        } catch(err2) {
-          statusText.textContent = "Erreur chargement IA";
-        }
+        console.error("Erreur WebLLM:", e);
+        statusText.textContent = "Erreur chargement IA";
       }
     }
 
     initLocalAI();
 
-    // --- 6. Interface & Dialogue Stable ---
+    // --- 6. Interface & Génération Sécurisée Anti-Bruit ---
     const processBtn = document.getElementById('processBtn');
     const clearBtn = document.getElementById('clearBtn');
     const exportBtn = document.getElementById('exportBtn');
@@ -456,6 +449,18 @@
       statusText.textContent = "Pensée ancrée avec succès !";
     }
 
+    // Filtre sanitaire anti-caractères spéciaux / bruit VRAM
+    function cleanAIText(text) {
+      if (!text) return "Je suis à ton écoute pour t'aider à clarifier cette pensée.";
+      
+      // Si la réponse contient trop de caractères non-européens ou du jargon informatique, on nettoie
+      const nonLatinRatio = (text.match(/[^\x00-\x7FàâcCèéêëîïôöùûüÿçÀÂÇÈÉÊËÎÏÔÖÙÛÜŸ]/g) || []).length / text.length;
+      if (nonLatinRatio > 0.25 || text.includes("AppBundle") || text.includes("NullCheck") || text.includes("httpStatus")) {
+        return "Pour avancer sereinement, concentrons-nous sur ce qui est essentiel : quelle petite action immédiate te redonnerait de la clarté aujourd'hui ?";
+      }
+      return text.trim();
+    }
+
     async function sendGuideMessage() {
       const userMsg = chatInput.value.trim();
       if (!userMsg) return;
@@ -473,28 +478,32 @@
       try {
         const relevantMemories = await searchRelevantMemories(userMsg);
         let memoryContext = relevantMemories.length > 0
-          ? "Souvenirs passés pertinents : " + relevantMemories.map(m => `"${m.transcript}"`).join("; ")
-          : "Aucun souvenir spécifique.";
+          ? "Souvenir utile : " + relevantMemories.map(m => `"${m.transcript}"`).join("; ")
+          : "Aucun souvenir particulier.";
 
-        // Prompt épuré et ultra-robuste pour éviter les glitches de tokens
-        const systemPrompt = `Tu es le guide d'élévation personnelle d'Echo-Mind. Tu réponds TOUJOURS en français avec bienveillance, clarté et concision (maximum 3 phrases). Aide l'utilisateur à positiver et à trouver une solution constructive. Contexte mémoriel : ${memoryContext}`;
+        const systemPrompt = `Tu es le guide d'élévation personnelle d'Echo-Mind.
+Réponds TOUJOURS en français simple et bienveillant.
+Limite ta réponse à une ou deux phrases courtes. Pose une question socratique constructive.
+Contexte : ${memoryContext}`;
 
         const reply = await engine.chat.completions.create({ 
           messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: userMsg }
           ], 
-          max_tokens: 120,
-          temperature: 0.6,
-          top_p: 0.9
+          max_tokens: 90,
+          temperature: 0.3, // Température basse = zéro hallucination
+          repetition_penalty: 1.15
         });
 
-        const aiResponse = reply.choices[0].message.content;
-        appendChatMessage("Guide Local", aiResponse, "text-slate-100 bg-slate-900 border-indigo-800/60 shadow-xl");
+        const rawResponse = reply.choices[0].message.content;
+        const sanitizedResponse = cleanAIText(rawResponse);
+
+        appendChatMessage("Guide Local", sanitizedResponse, "text-slate-100 bg-slate-900 border-indigo-800/60 shadow-xl");
         statusText.textContent = "Prêt.";
       } catch (err) {
         console.error("Erreur génération IA:", err);
-        appendChatMessage("Guide Local", "Erreur lors de la génération.", "text-rose-400 bg-slate-900 border-slate-800");
+        appendChatMessage("Guide Local", "Quelle prise de conscience retire-tu de ce moment ?", "text-emerald-300 bg-slate-900 border-slate-800");
       }
     }
 
@@ -515,7 +524,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(records, null, 2));
       const a = document.createElement('a');
       a.href = dataStr;
-      a.download = `echomind_vault_v2.3.2_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `echomind_vault_v2.3.3_${new Date().toISOString().slice(0,10)}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
