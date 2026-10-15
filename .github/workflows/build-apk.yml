@@ -1,0 +1,50 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Récupérer le code source
+        uses: actions/checkout@v4
+
+      - name: 2. Configurer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: 3. Configurer Java 17 (Requis pour Android)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: 4. Installer les dépendances npm
+        run: npm ci
+
+      - name: 5. Copier et Synchroniser Capacitor
+        run: |
+          npx cap copy android
+          npx cap sync android
+
+      - name: 6. Donner les permissions au script Gradle
+        run: chmod +x android/gradlew
+
+      - name: 7. Compiler l'APK Android (Debug)
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+      - name: 8. Publier l'APK comme fichier téléchargeable (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: EchoMind-Android-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
