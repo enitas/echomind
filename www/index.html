@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Echo-Mind v6.1 | Nexus Vectoriel Dense & Edge-AI</title>
+  <title>Echo-Mind v6.5 | Routeur Social & Nexus Souverain</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
   <script>
@@ -35,11 +35,11 @@
   <header class="flex justify-between items-center max-w-5xl mx-auto w-full border-b border-slate-800 pb-3">
     <div class="flex items-center space-x-2">
       <div id="statusDot" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-emerald-400 font-mono">v6.1</span></h1>
+      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-emerald-400 font-mono">v6.5</span></h1>
     </div>
     <div class="flex items-center gap-2">
       <span id="engineBadge" class="text-[10px] px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 glow-badge">
-        🧠 Nexus Vectoriel Dense
+        🧠 Routeur Social & RAG
       </span>
       <button id="exportBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
         📥 Export Vault
@@ -53,9 +53,9 @@
     <!-- Statut Global & Télémétrie -->
     <div class="text-center space-y-0.5">
       <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Moteur Vectoriel Souverain</h2>
-      <p id="status" class="text-xs text-indigo-300/90">Vérification de l'intégrité du système...</p>
+      <p id="status" class="text-xs text-indigo-300/90">Initialisation du routeur conversationnel...</p>
       <div id="telemetryBar" class="text-[9px] font-mono text-slate-500 pt-1">
-        Latence TTFT: <span id="metricTtft">0ms</span> | Similarité Vectorielle: <span id="metricSim">Cos-Dense</span> | État: <span id="metricState">Optimal</span>
+        Latence TTFT: <span id="metricTtft">0ms</span> | Mode: <span id="metricSim">Hybride Social/RAG</span> | État: <span id="metricState">Optimal</span>
       </div>
     </div>
 
@@ -65,8 +65,11 @@
       <!-- Graphe 3D -->
       <div class="bg-brand-card border border-slate-800/80 rounded-xl p-3 shadow-2xl flex flex-col items-center relative">
         <div class="w-full flex justify-between items-center mb-1.5 px-1">
-          <span class="text-[10px] font-semibold text-indigo-300 uppercase tracking-widest flex items-center gap-1">🌌 Constellation Vectorielle Dense</span>
-          <button id="refreshGraphBtn" class="text-[10px] text-indigo-400 hover:text-indigo-300 underline cursor-pointer">Actualiser</button>
+          <span class="text-[10px] font-semibold text-indigo-300 uppercase tracking-widest flex items-center gap-1">🌌 Constellation Sémantique Structurée</span>
+          <div class="flex gap-2">
+            <button id="centerGraphBtn" class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/30 hover:bg-indigo-900 transition cursor-pointer" title="Centrer la vue">🎯 Centrer</button>
+            <button id="refreshGraphBtn" class="text-[10px] text-indigo-400 hover:text-indigo-300 underline cursor-pointer">Actualiser</button>
+          </div>
         </div>
         <div id="graphContainer" class="bg-slate-950 border border-slate-900"></div>
         <span class="absolute bottom-3 left-4 text-[9px] text-slate-500 pointer-events-none">💡 Cliquez sur un nœud pour analyser un instant vécu</span>
@@ -106,8 +109,8 @@
 
       <div id="chatContainer" class="h-44 sm:h-52 overflow-y-auto chat-scroll space-y-3 pr-1 text-xs sm:text-sm text-slate-200">
         <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-lg max-w-xl">
-          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Souverain v6.1</span>
-          Système initialisé avec succès. Moteur vectoriel dense actif. Prêt.
+          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Souverain v6.5</span>
+          Routeur social actif. Bonjour ! Comment puis-je vous accompagner dans votre introspection aujourd'hui ?
         </div>
       </div>
 
@@ -141,16 +144,15 @@
   </div>
 
   <footer class="text-center text-[10px] text-slate-600 max-w-5xl mx-auto w-full pt-1.5 border-t border-slate-900">
-    Echo-Mind Engine v6.1 — Nexus Vectoriel Dense & Résilience Exabyte.
+    Echo-Mind Engine v6.5 — Routeur Social & Précision Souveraine.
   </footer>
 
-  <!-- Script Logique v6.1 -->
+  <!-- Script Logique v6.5 -->
   <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
     import * as webllm from "https://esm.run/@mlc-ai/web-llm";
 
-    // --- 1. IndexedDB Vault Service Transactionnel ---
-    class EchoMindVaultService {
+    class VaultManager {
       constructor(dbName = "EchoMindVault", storeName = "thoughts") {
         this.dbName = dbName;
         this.storeName = storeName;
@@ -205,67 +207,84 @@
       }
     }
 
-    const vault = new EchoMindVaultService();
+    const vault = new VaultManager();
 
-    // --- 2. Générateur d'Embeddings Vectoriels Denses & Similarité Cosinus ---
-    function textToDenseVector(text) {
-      const vector = new Array(16).fill(0);
-      const clean = text.toLowerCase();
-      for (let i = 0; i < clean.length; i++) {
-        const charCode = clean.charCodeAt(i);
-        vector[i % 16] += Math.sin(charCode);
+    class SemanticEngine {
+      static textToDenseVector(text) {
+        const vector = new Array(16).fill(0);
+        const clean = text.toLowerCase();
+        for (let i = 0; i < clean.length; i++) {
+          const charCode = clean.charCodeAt(i);
+          vector[i % 16] += Math.sin(charCode);
+        }
+        const magnitude = Math.sqrt(vector.reduce((sum, val) => sum + val * val, 0)) || 1;
+        return vector.map(val => val / magnitude);
       }
-      const magnitude = Math.sqrt(vector.reduce((sum, val) => sum + val * val, 0)) || 1;
-      return vector.map(val => val / magnitude);
+
+      static cosineSimilarity(vecA, vecB) {
+        if (!vecA.length || !vecB.length) return 0;
+        let dotProduct = 0, normA = 0, normB = 0;
+        for (let i = 0; i < vecA.length; i++) {
+          dotProduct += vecA[i] * vecB[i];
+          normA += vecA[i] * vecA[i];
+          normB += vecB[i] * vecB[i];
+        }
+        return (normA === 0 || normB === 0) ? 0 : dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+      }
+
+      static extractStructuredConcepts(text) {
+        const MEANINGFUL_THEMES = [
+          { trigger: ["peur", "angoisse", "stress", "panique", "doute", "incertitude"], label: "⚡ Vulnérabilité & Doute" },
+          { trigger: ["pourquoi", "sens", "but", "direction", "chemin", "quête"], label: "🎯 Quête de Sens" },
+          { trigger: ["bloqué", "obstacle", "frein", "dur", "fatigue", "epuisé"], label: "🧱 Résistance & Inertie" },
+          { trigger: ["joie", "paix", "clair", "solution", "trouvé", "force", "calme"], label: "✨ Clarté & Élan" },
+          { trigger: ["travail", "projet", "code", "action", "faire", "créer"], label: "🛠️ Œuvre & Action" }
+        ];
+
+        const lower = text.toLowerCase();
+        const matchedThemes = [];
+        
+        MEANINGFUL_THEMES.forEach(theme => {
+          if (theme.trigger.some(keyword => lower.includes(keyword))) {
+            matchedThemes.push(theme.label);
+          }
+        });
+
+        if (matchedThemes.length === 0) {
+          const clean = lower.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, " ").replace(/\s{2,}/g, " ");
+          const words = clean.split(" ").filter(w => w.length > 4 && !["alors", "aussi", "autre", "avant", "avec", "dans", "pour", "sont", "sur", "tout", "très", "vous"].includes(w));
+          if (words.length > 0) {
+            matchedThemes.push(`💡 Axe : ${words[0].charAt(0).toUpperCase() + words[0].slice(1)}`);
+          } else {
+            matchedThemes.push("🌀 Introspection Libre");
+          }
+        }
+        return matchedThemes;
+      }
     }
 
-    function cosineSimilarity(vecA, vecB) {
-      if (!vecA.length || !vecB.length) return 0;
-      let dotProduct = 0;
-      let normA = 0;
-      let normB = 0;
-      for (let i = 0; i < vecA.length; i++) {
-        dotProduct += vecA[i] * vecB[i];
-        normA += vecA[i] * vecA[i];
-        normB += vecB[i] * vecB[i];
-      }
-      return (normA === 0 || normB === 0) ? 0 : dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-    }
-
-    async function searchVectorMemories(userQuery) {
+    async function searchHybridMemories(userQuery) {
       const allThoughts = await vault.getAllRecords();
       if (allThoughts.length === 0) return [];
-      
-      const queryVector = textToDenseVector(userQuery);
+
+      const sortedByTime = [...allThoughts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      const latestThought = sortedByTime[0];
+
+      const queryVector = SemanticEngine.textToDenseVector(userQuery);
       const scored = allThoughts.map(t => {
-        const sim = t.vector && t.vector.length ? cosineSimilarity(queryVector, t.vector) : 0.1;
+        const sim = t.vector && t.vector.length ? SemanticEngine.cosineSimilarity(queryVector, t.vector) : 0.1;
         return { thought: t, score: sim };
       });
+      scored.sort((a, b) => b.score - a.score);
+      const mostRelevant = scored[0] ? scored[0].thought : null;
 
-      return scored.sort((a, b) => b.score - a.score).slice(0, 2).map(s => s.thought);
+      const hybridSet = new Map();
+      if (latestThought) hybridSet.set(latestThought.id, latestThought);
+      if (mostRelevant) hybridSet.set(mostRelevant.id, mostRelevant);
+
+      return Array.from(hybridSet.values());
     }
 
-    const FRENCH_STOPWORDS = new Set([
-      "alors", "auquel", "aussi", "autre", "avant", "avec", "avoir", "bon", "car", "ceci",
-      "cela", "celle", "celui", "cette", "ceux", "chaque", "dans", "depuis", "donc", "dont",
-      "elle", "elles", "encore", "entre", "être", "faire", "haut", "hors", "ici", "juste",
-      "mais", "même", "moins", "monde", "mot", "notre", "nous", "parce", "plus", "pour",
-      "pourquoi", "quand", "quel", "quelle", "quelles", "quels", "sans", "sauf", "selon",
-      "sont", "sous", "sujet", "sur", "tandis", "tellement", "tous", "tout", "très", "votre",
-      "vous", "comme", "dire", "penser", "chose"
-    ]);
-
-    function extractSemanticConcepts(text) {
-      const cleanText = text.toLowerCase()
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, " ")
-        .replace(/\s{2,}/g, " ");
-      const words = cleanText.split(" ").filter(w => w.length > 3 && !FRENCH_STOPWORDS.has(w));
-      const freqMap = {};
-      words.forEach(w => { freqMap[w] = (freqMap[w] || 0) + 1; });
-      return Object.keys(freqMap).sort((a, b) => freqMap[b] - freqMap[a]).slice(0, 3);
-    }
-
-    // --- 3. Constellation 3D Vectorielle Dense ---
     let graphInstance = null;
     let selectedThoughtForModal = null;
 
@@ -279,30 +298,29 @@
         nodesMap.set(thoughtNodeId, { 
           id: thoughtNodeId, 
           group: 'thought', 
-          val: 9, 
+          val: 10, 
           transcript: record.transcript,
           timestamp: record.timestamp,
-          x: Math.cos(idx * 0.6) * 45,
-          y: Math.sin(idx * 0.6) * 45,
-          z: (idx % 4) * 12
+          x: Math.cos(idx * 0.7) * 50,
+          y: Math.sin(idx * 0.7) * 50,
+          z: (idx % 3) * 15
         });
 
         if (record.nodes && Array.isArray(record.nodes)) {
           record.nodes.forEach(concept => {
-            const cleanConcept = `#${concept.trim().toLowerCase()}`;
-            if (!nodesMap.has(cleanConcept)) {
-              nodesMap.set(cleanConcept, { 
-                id: cleanConcept, 
+            if (!nodesMap.has(concept)) {
+              nodesMap.set(concept, { 
+                id: concept, 
                 group: 'concept', 
-                val: 5, 
-                transcript: `Axe d'introspection lié : "${cleanConcept}"`,
+                val: 6, 
+                transcript: `Pôle thématique : ${concept}`,
                 timestamp: record.timestamp,
-                x: (Math.random() - 0.5) * 80,
-                y: (Math.random() - 0.5) * 80,
-                z: (Math.random() - 0.5) * 40
+                x: (Math.random() - 0.5) * 90,
+                y: (Math.random() - 0.5) * 90,
+                z: (Math.random() - 0.5) * 45
               });
             }
-            links.push({ source: thoughtNodeId, target: cleanConcept, strength: 0.85 });
+            links.push({ source: thoughtNodeId, target: concept, strength: 0.9 });
           });
         }
       });
@@ -317,8 +335,8 @@
             .nodeColor(node => node.group === 'thought' ? '#818cf8' : '#34d399')
             .nodeVal(node => node.val)
             .nodeResolution(24)
-            .linkWidth(1.2)
-            .linkColor(() => 'rgba(99, 102, 241, 0.3)')
+            .linkWidth(1.5)
+            .linkColor(() => 'rgba(99, 102, 241, 0.35)')
             .linkDirectionalParticles(2)
             .linkDirectionalParticleSpeed(0.004)
             .linkDirectionalParticleWidth(2)
@@ -338,6 +356,8 @@
     const modalTranscript = document.getElementById('modalTranscript');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modalDiscussBtn = document.getElementById('modalDiscussBtn');
+    const centerGraphBtn = document.getElementById('centerGraphBtn');
+    const chatInput = document.getElementById('chatInput');
 
     function openThoughtModal(node) {
       selectedThoughtForModal = node.transcript;
@@ -358,7 +378,12 @@
       }
     });
 
-    // --- 4. Whisper FR + Flux audio strict ---
+    centerGraphBtn.addEventListener('click', () => {
+      if (graphInstance) {
+        graphInstance.zoomToFit(600, 50);
+      }
+    });
+
     let transcriber = null;
     const micStatus = document.getElementById('micStatus');
     const recordBtn = document.getElementById('recordBtn');
@@ -429,7 +454,6 @@
       }
     });
 
-    // --- 5. Core Hybride & Circuit Breaker avec Timeout de Sécurité ---
     let engine = null;
     let aiMode = "hybrid";
     const statusText = document.getElementById('status');
@@ -437,7 +461,7 @@
     const metricState = document.getElementById('metricState');
 
     async function initLocalAI() {
-      statusText.textContent = "Initialisation du Core v6.1...";
+      statusText.textContent = "Initialisation du Core v6.5...";
       try {
         const enginePromise = webllm.CreateMLCEngine("Phi-3-mini-4k-instruct-q4f16_1-MLC", {
           initProgressCallback: (report) => {
@@ -463,24 +487,18 @@
 
     function generateDeterministicResponse(userQuery, memories) {
       const q = userQuery.toLowerCase();
-      let memoryRecall = memories.length > 0 ? ` En écho à ton passé dense ("${memories[0].transcript}"),` : "";
-
-      if (q.includes("peur") || q.includes("doute") || q.includes("stress") || q.includes("angoisse")) {
-        return `J'entends ton hésitation.${memoryRecall} Le doute est souvent le signal qu'un changement important se prépare. Quelle est la première micro-action concrète que tu peux poser dès aujourd'hui pour reprendre le contrôle ?`;
-      } else if (q.includes("pourquoi") || q.includes("sens") || q.includes("bloqué")) {
-        return `Tu fais face à une résistance naturelle.${memoryRecall} Observe ce qui te pèse et demande-toi : est-ce que cela dépend réellement de toi ? Concentre ton énergie uniquement sur ce que tu peux changer maintenant.`;
-      } else {
-        return `Ton interrogation touche un point clé de ton parcours.${memoryRecall} Prends du recul, respire profondément et rappelle-toi que chaque pas d'introspection construit ta clarté future. Quelle direction souhaites-tu privilégier ?`;
+      if (q.includes("bonjour") || q.includes("salut") || q.includes("ça va") || q.includes("comment vas")) {
+        return "Bonjour ! Je vais très bien, prêt à t'accompagner dans tes réflexions. De quoi souhaites-tu parler ?";
       }
+      let memoryRecall = memories.length > 0 ? ` En écho à ton passé ("${memories[0].transcript}"),` : "";
+      return `Ton interrogation touche un point clé de ton parcours.${memoryRecall} Prends du recul, respire profondément et rappelle-toi que chaque pas d'introspection construit ta clarté future. Quelle direction souhaites-tu privilégier ?`;
     }
 
-    // --- 6. Interface & Gestionnaire d'Exécution ---
     const processBtn = document.getElementById('processBtn');
     const clearBtn = document.getElementById('clearBtn');
     const exportBtn = document.getElementById('exportBtn');
     const refreshGraphBtn = document.getElementById('refreshGraphBtn');
     const chatContainer = document.getElementById('chatContainer');
-    const chatInput = document.getElementById('chatInput');
     const sendChatBtn = document.getElementById('sendChatBtn');
 
     async function initSystem() {
@@ -492,13 +510,13 @@
       const textToAnalyze = thoughtInput.value.trim();
       if (!textToAnalyze) { alert("Exprimez d'abord votre pensée."); return; }
 
-      const extractedConcepts = extractSemanticConcepts(textToAnalyze);
-      const denseVector = textToDenseVector(textToAnalyze);
-      await vault.saveRecord(textToAnalyze, extractedConcepts, denseVector);
+      const structuredConcepts = SemanticEngine.extractStructuredConcepts(textToAnalyze);
+      const denseVector = SemanticEngine.textToDenseVector(textToAnalyze);
+      await vault.saveRecord(textToAnalyze, structuredConcepts, denseVector);
       await render3DGraph();
 
       thoughtInput.value = "";
-      statusText.textContent = "Pensée ancrée avec succès dans le nexus vectoriel !";
+      statusText.textContent = "Pensée ancrée avec succès dans le nexus sémantique !";
     }
 
     async function sendGuideMessage() {
@@ -507,46 +525,49 @@
 
       appendChatMessage("Toi", userMsg, "text-indigo-300 bg-indigo-950/40 border-indigo-900/50");
       chatInput.value = "";
-      statusText.textContent = "Analyse vectorielle en cours...";
+      statusText.textContent = "Analyse en cours...";
 
       const startTime = performance.now();
-      const relevantMemories = await searchVectorMemories(userMsg);
       let finalResponse = "";
+      const qLower = userMsg.toLowerCase();
+
+      // Routeur Social : si salutation simple, pas besoin de RAG lourd
+      const isSocialGreeting = qLower.includes("bonjour") || qLower.includes("salut") || qLower.includes("ça va") || qLower.includes("comment vas") || qLower.includes("coucou");
 
       if (aiMode === "hybrid" && engine) {
         try {
-          let memoryContext = relevantMemories.length > 0
-            ? "Souvenir dense utile : " + relevantMemories.map(m => `"${m.transcript}"`).join("; ")
-            : "Aucun souvenir particulier.";
+          let systemPrompt = "";
+          if (isSocialGreeting) {
+            systemPrompt = "Tu es un assistant bienveillant. Réponds simplement, chaleureusement et naturellement en français à la salutation de l'utilisateur (max 1 phrase).";
+          } else {
+            const hybridMemories = await searchHybridMemories(userMsg);
+            let memoryContext = hybridMemories.length > 0
+              ? "Mémoire récente et pertinente de l'utilisateur : " + hybridMemories.map(m => `[${m.timestamp}] "${m.transcript}"`).join(" | ")
+              : "Aucun souvenir particulier.";
 
-          const systemPrompt = `Tu es le guide d'élévation personnelle d'Echo-Mind. Réponds TOUJOURS en français simple, clair et bienveillant (max 2 phrases). Pose une question socratique. Contexte : ${memoryContext}`;
+            systemPrompt = `Tu es le guide d'élévation personnelle d'Echo-Mind. Tu réponds strictement en français, de manière claire, directe et naturelle en t'appuyant sur les souvenirs de l'utilisateur si nécessaire (max 2 phrases). Ne fabrique rien. Contexte : ${memoryContext}`;
+          }
 
           const reply = await engine.chat.completions.create({ 
             messages: [
               { role: "system", content: systemPrompt },
               { role: "user", content: userMsg }
             ], 
-            max_tokens: 80,
+            max_tokens: 60,
             temperature: 0.2
           });
 
-          const raw = reply.choices[0].message.content;
-          const nonLatinRatio = (raw.match(/[^\x00-\x7FàâcCèéêëîïôöùûüÿçÀÂÇÈÉÊËÎÏÔÖÙÛÜŸ]/g) || []).length / raw.length;
-          if (nonLatinRatio > 0.2 || raw.includes("NullCheck") || raw.includes("AppBundle") || raw.length < 5) {
-            throw new Error("Glitch détecté, bascule sur le moteur souverain.");
-          }
-          finalResponse = raw.trim();
-          
+          finalResponse = reply.choices[0].message.content.trim();
           const duration = performance.now() - startTime;
           metricTtft.textContent = `${Math.round(duration)}ms`;
         } catch (err) {
-          console.warn("Basculement de sécurité vers le moteur déterministe:", err);
+          console.warn("Basculement de sécurité vers le déterministe:", err);
           aiMode = "fallback";
-          metricState.textContent = "Fallback Activé";
-          finalResponse = generateDeterministicResponse(userMsg, relevantMemories);
+          finalResponse = generateDeterministicResponse(userMsg, []);
         }
       } else {
-        finalResponse = generateDeterministicResponse(userMsg, relevantMemories);
+        const hybridMemories = isSocialGreeting ? [] : await searchHybridMemories(userMsg);
+        finalResponse = generateDeterministicResponse(userMsg, hybridMemories);
       }
 
       appendChatMessage("Guide Souverain", finalResponse, "text-slate-100 bg-slate-900 border-indigo-800/60 shadow-xl");
@@ -568,7 +589,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(records, null, 2));
       const a = document.createElement('a');
       a.href = dataStr;
-      a.download = `echomind_vault_v6.1_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `echomind_vault_v6.5_${new Date().toISOString().slice(0,10)}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
