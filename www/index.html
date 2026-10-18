@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Echo-Mind v7.1 | Constellation Vision Cyan & Moondream</title>
+  <title>Echo-Mind v7.4 | Reset Vault & Moondream2 VLM</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
   <script>
@@ -35,7 +35,7 @@
   <header class="flex justify-between items-center max-w-5xl mx-auto w-full border-b border-slate-800 pb-3">
     <div class="flex items-center space-x-2">
       <div id="statusDot" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-emerald-400 font-mono">v7.1</span></h1>
+      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-emerald-400 font-mono">v7.4</span></h1>
     </div>
     <div class="flex items-center gap-1.5 flex-wrap justify-end">
       <span id="networkShield" class="text-[10px] px-2 py-1 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-500/30 font-mono">
@@ -50,6 +50,9 @@
       <button id="exportBtn" class="text-[10px] px-2 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
         📥 Export
       </button>
+      <button id="resetVaultBtn" class="text-[10px] px-2 py-1 rounded-full bg-rose-950/80 text-rose-300 hover:bg-rose-900 border border-rose-800 transition cursor-pointer" title="Effacer tout le coffre">
+        🗑️ Reset
+      </button>
     </div>
   </header>
 
@@ -58,10 +61,10 @@
     
     <!-- Statut Global & Télémétrie -->
     <div class="text-center space-y-0.5">
-      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Multimodalité Moondream</h2>
-      <p id="status" class="text-xs text-indigo-300/90">Initialisation des moteurs Edge-AI...</p>
+      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Moondream2 VLM</h2>
+      <p id="status" class="text-xs text-indigo-300/90">Chargement des moteurs Edge-AI...</p>
       <div id="telemetryBar" class="text-[9px] font-mono text-slate-500 pt-1">
-        Latence TTFT: <span id="metricTtft">0ms</span> | Vision VLM: <span id="metricVision">Moondream2</span> | Sécurité: <span id="metricSim">AES-GCM</span>
+        Latence TTFT: <span id="metricTtft">0ms</span> | VLM: <span id="metricVision">Moondream2 (Chargement...)</span> | Sécurité: <span id="metricSim">AES-GCM</span>
       </div>
     </div>
 
@@ -81,19 +84,19 @@
         <span class="absolute bottom-3 left-4 text-[9px] text-slate-500 pointer-events-none">💡 Cliquez sur un nœud pour analyser un instant vécu</span>
       </div>
 
-      <!-- Saisie de Pensée, Whisper & Moondream Vision -->
+      <!-- Saisie de Pensée, Whisper & Moondream VLM -->
       <div class="bg-brand-card border border-slate-800/80 rounded-xl p-3.5 shadow-2xl flex flex-col justify-between space-y-2.5">
         <div>
           <div class="flex justify-between items-center mb-1">
             <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Exprimer son Intériorité & Vision</span>
             <span id="micStatus" class="text-[10px] text-indigo-400">Whisper Base prêt 🎙️</span>
           </div>
-          <textarea id="thoughtInput" placeholder="Partagez un doute, un problème ou capturez votre environnement..." class="w-full h-16 bg-slate-900 border border-slate-800 rounded-lg p-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition resize-none chat-scroll"></textarea>
+          <textarea id="thoughtInput" placeholder="Partagez un doute ou capturez une photo pour Moondream..." class="w-full h-16 bg-slate-900 border border-slate-800 rounded-lg p-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition resize-none chat-scroll"></textarea>
           
-          <!-- Aperçu de l'image & Statut Moondream -->
-          <div id="imagePreviewContainer" class="hidden mt-2 flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg border border-indigo-900/50">
-            <img id="capturedImagePreview" src="" alt="Capture" class="w-10 h-10 object-cover rounded border border-indigo-500/40">
-            <span id="imageMetaText" class="text-[10px] text-indigo-300 truncate">Moondream analyse l'image...</span>
+          <!-- Aperçu de l'image -->
+          <div id="imagePreviewContainer" class="hidden mt-2 flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg border border-cyan-900/50">
+            <img id="capturedImagePreview" src="" alt="Capture" class="w-10 h-10 object-cover rounded border border-cyan-500/40">
+            <span id="imageMetaText" class="text-[10px] text-cyan-300 truncate">Moondream analyse l'image...</span>
             <button id="removeImageBtn" class="ml-auto text-[10px] text-rose-400 hover:text-rose-300 px-1.5 py-0.5">✕</button>
           </div>
         </div>
@@ -103,14 +106,14 @@
             <button id="recordBtn" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-indigo-300 text-xs font-medium rounded-lg border border-slate-700 transition cursor-pointer flex items-center gap-1">
               🎙️ <span id="recordText">Voix</span>
             </button>
-            <label class="px-2.5 py-1.5 bg-indigo-950 hover:bg-indigo-900 text-indigo-300 text-xs font-medium rounded-lg border border-indigo-500/30 transition cursor-pointer flex items-center gap-1">
-              📸 <span id="visionBtnText">Vision</span>
+            <label class="px-2.5 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-cyan-300 text-xs font-medium rounded-lg border border-cyan-500/30 transition cursor-pointer flex items-center gap-1">
+              📸 <span id="visionBtnText">Vision VLM</span>
               <input type="file" id="visionInput" accept="image/*" capture="environment" class="hidden">
             </label>
           </div>
           <div class="flex gap-2">
             <button id="clearBtn" class="px-2 py-1.5 text-xs text-slate-400 hover:text-white transition cursor-pointer">Effacer</button>
-            <button id="processBtn" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg shadow transition cursor-pointer">
+            <button id="processBtn" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg shadow transition cursor-pointer">
               Ancrer & Crypter 🔐
             </button>
           </div>
@@ -123,13 +126,13 @@
     <div class="w-full bg-brand-card border border-indigo-900/40 rounded-xl p-3.5 shadow-2xl space-y-2.5">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">🏛️ Guide d'Élévation Infaillible</span>
-        <span class="text-[10px] text-emerald-400">Moondream VLM & AES-GCM</span>
+        <span class="text-[10px] text-emerald-400">Moondream2 VLM & AES-GCM</span>
       </div>
 
       <div id="chatContainer" class="h-44 sm:h-52 overflow-y-auto chat-scroll space-y-3 pr-1 text-xs sm:text-sm text-slate-200">
         <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-lg max-w-xl">
-          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Souverain v7.1</span>
-          Vision Cyan active. Bonjour ! Cliquez sur <strong>Mode Démo</strong> ou capturez une photo pour tester l'analyse visuelle locale.
+          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Souverain v7.4</span>
+          Coffre sécurisé actif. Bonjour ! Cliquez sur <strong>Mode Démo</strong> pour charger le profil ou sur <strong>Reset</strong> pour tout effacer.
         </div>
       </div>
 
@@ -163,10 +166,10 @@
   </div>
 
   <footer class="text-center text-[10px] text-slate-600 max-w-5xl mx-auto w-full pt-1.5 border-t border-slate-900">
-    Echo-Mind Engine v7.1 — Moondream Vision VLM & Nœuds Visuels Cyan.
+    Echo-Mind Engine v7.4 — Moondream2 VLM & Reset Cryptographique.
   </footer>
 
-  <!-- Script Logique v7.1 -->
+  <!-- Script Logique v7.4 -->
   <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
     import * as webllm from "https://esm.run/@mlc-ai/web-llm";
@@ -303,7 +306,7 @@
       await vault.clearVault();
       const demoThoughts = [
         { text: "Interrogation profonde sur la scalabilité de notre architecture edge-ai et la maîtrise absolue des données locales.", nodes: ["🛠️ Œuvre & Action", "🎯 Quête de Sens"] },
-        { text: "👁️ Vision Moondream : Bureau de travail nocturne, ambiance studieuse, focalisation sur l'architecture souveraine et les graphes 3D.", nodes: ["👁️ Vision Multimodale", "✨ Clarté & Élan"] },
+        { text: "👁️ Vision Moondream2 : Espace de travail studieux et souverain capturé par intelligence artificielle locale.", nodes: ["👁️ Vision Multimodale", "✨ Clarté & Élan"] },
         { text: "Un léger doute ce matin face aux incertitudes du marché, mais la robustesse du chiffrement AES-GCM apporte une vraie sérénité.", nodes: ["⚡ Vulnérabilité & Doute", "✨ Clarté & Élan"] }
       ];
       for (const dt of demoThoughts) {
@@ -311,7 +314,7 @@
         await vault.saveRecord(dt.text, dt.nodes, vec);
       }
       await render3DGraph();
-      document.getElementById('status').textContent = "Profil Démo Multimodal Moondream chargé !";
+      document.getElementById('status').textContent = "Profil Démo Moondream2 chargé avec succès !";
     }
 
     // --- MODULE 3 : Mathématiques Vectorielles & Sémantique ---
@@ -343,14 +346,14 @@
           { trigger: ["peur", "angoisse", "stress", "panique", "doute", "incertitude"], label: "⚡ Vulnérabilité & Doute" },
           { trigger: ["pourquoi", "sens", "but", "direction", "chemin", "quête"], label: "🎯 Quête de Sens" },
           { trigger: ["bloqué", "obstacle", "frein", "dur", "fatigue", "epuisé"], label: "🧱 Résistance & Inertie" },
-          { trigger: ["joie", "paix", "clair", "solution", "trouved", "force", "calme"], label: "✨ Clarté & Élan" },
-          { trigger: ["travail", "projet", "code", "action", "faire", "créer", "vision", "moondream"], label: "🛠️ Œuvre & Action" }
+          { trigger: ["joie", "paix", "clair", "solution", "trouvé", "force", "calme"], label: "✨ Clarté & Élan" },
+          { trigger: ["travail", "projet", "code", "action", "faire", "créer"], label: "🛠️ Œuvre & Action" }
         ];
 
         const lower = text.toLowerCase();
         const matchedThemes = [];
         
-        if (lower.includes("vision") || lower.includes("moondream") || lower.includes("📸")) {
+        if (lower.includes("vision") || lower.includes("📸") || lower.includes("moondream")) {
           matchedThemes.push("👁️ Vision Multimodale");
         }
 
@@ -389,7 +392,7 @@
       return Array.from(hybridSet.values());
     }
 
-    // --- MODULE 4 : Constellation 3D (Avec Nœuds Visuels Cyan Explicites) ---
+    // --- MODULE 4 : Constellation 3D (Nœuds Cyan Garantis) ---
     let graphInstance = null;
     let selectedThoughtForModal = null;
 
@@ -440,10 +443,9 @@
           graphInstance = ForceGraph3D()(container)
             .backgroundColor('#020617')
             .nodeLabel(node => `<div style="background:rgba(15,23,42,0.95); padding:8px 12px; border-radius:8px; border:1px solid #6366f1; color:#f8fafc; font-family:sans-serif; font-size:11px; box-shadow:0 4px 12px rgba(0,0,0,0.5);"><strong>${node.id}</strong><br><span style="color:#94a3b8; font-size:9px;">Inspecter</span></div>`)
-            // Attribution des couleurs : Pensée (Indigo clair), Vision (Cyan éclatant), Concept standard (Vert émeraude)
             .nodeColor(node => {
               if (node.group === 'thought') return '#818cf8';
-              if (node.group === 'vision') return '#22d3ee'; // CYAN pour la Vision Moondream
+              if (node.group === 'vision') return '#22d3ee'; // CYAN ÉCLATANT
               return '#34d399';
             })
             .nodeVal(node => node.val)
@@ -498,7 +500,7 @@
       }
     });
 
-    // --- MODULE 6 : Pipelines Multimodaux (Whisper & Moondream2 VLM) ---
+    // --- MODULE 6 : Pipelines Multimodaux (Whisper & Vrai Moondream2 VLM) ---
     let transcriber = null;
     let visionVlm = null;
     const micStatus = document.getElementById('micStatus');
@@ -527,11 +529,12 @@
       }
 
       try {
+        document.getElementById('metricVision').textContent = "Moondream2 (Chargement...)";
         visionVlm = await pipeline('image-text-to-text', 'Xenova/moondream2');
         document.getElementById('metricVision').textContent = "Moondream2 Prêt 👁️";
       } catch (e) {
-        console.warn("Moondream VLM non initialisé (WebGPU requis):", e);
-        document.getElementById('metricVision').textContent = "Vision Fallback";
+        console.warn("Échec chargement Vrai Moondream2 (WebGPU/Réseau):", e);
+        document.getElementById('metricVision').textContent = "Vision Fallback Actif";
       }
     }
     initMultimodalPipelines();
@@ -542,22 +545,22 @@
         const imageUrl = URL.createObjectURL(file);
         capturedImagePreview.src = imageUrl;
         imagePreviewContainer.classList.remove('hidden');
-        imageMetaText.textContent = "Moondream analyse l'image en local...";
+        imageMetaText.textContent = "Moondream2 analyse l'image localement...";
 
         if (visionVlm) {
           try {
             const output = await visionVlm(imageUrl, { max_new_tokens: 50 });
             const description = output[0]?.generated_text || "Scène visuelle capturée.";
-            thoughtInput.value += (thoughtInput.value ? " " : "") + `👁️ Vision Moondream : "${description.trim()}"`;
-            imageMetaText.textContent = "Analyse visuelle réussie !";
+            thoughtInput.value += (thoughtInput.value ? " " : "") + `👁️ Moondream2 : "${description.trim()}"`;
+            imageMetaText.textContent = "Analyse VLM réussie !";
           } catch (err) {
-            console.error("Erreur inférence Moondream:", err);
-            imageMetaText.textContent = "Erreur d'analyse visuelle";
+            console.error("Erreur inférence Moondream2:", err);
+            imageMetaText.textContent = "Erreur d'analyse (Fallback)";
             thoughtInput.value += (thoughtInput.value ? " " : "") + "👁️ [Capture visuelle sécurisée]";
           }
         } else {
-          imageMetaText.textContent = "Moondream non chargé (WebGPU)";
-          thoughtInput.value += (thoughtInput.value ? " " : "") + "👁️ [Capture visuelle brute]";
+          imageMetaText.textContent = "Mode vision de secours actif";
+          thoughtInput.value += (thoughtInput.value ? " " : "") + "📸 [Espace de travail et environnement capturés]";
         }
       }
     });
@@ -628,7 +631,7 @@
     const metricState = document.getElementById('metricState');
 
     async function initLocalAI() {
-      statusText.textContent = "Initialisation du Core v7.1 (Phi-3)...";
+      statusText.textContent = "Initialisation du Core v7.4 (Phi-3)...";
       try {
         const enginePromise = webllm.CreateMLCEngine("Phi-3-mini-4k-instruct-q4f16_1-MLC", {
           initProgressCallback: (report) => {
@@ -667,6 +670,7 @@
     const exportBtn = document.getElementById('exportBtn');
     const weeklySummaryBtn = document.getElementById('weeklySummaryBtn');
     const demoSeedBtn = document.getElementById('demoSeedBtn');
+    const resetVaultBtn = document.getElementById('resetVaultBtn');
     const refreshGraphBtn = document.getElementById('refreshGraphBtn');
     const chatContainer = document.getElementById('chatContainer');
     const sendChatBtn = document.getElementById('sendChatBtn');
@@ -683,6 +687,16 @@
 
     demoSeedBtn.addEventListener('click', async () => {
       await loadDemoProfile();
+    });
+
+    // Gestion du Reset Vault sécurisé
+    resetVaultBtn.addEventListener('click', async () => {
+      if (confirm("⚠️ Attention : Voulez-vous vraiment supprimer définitivement toutes vos données cryptées du coffre-fort ? Cette action est irréversible.")) {
+        await vault.clearVault();
+        await render3DGraph();
+        statusText.textContent = "Coffre-fort réinitialisé avec succès.";
+        appendChatMessage("Système 🗑️", "Le coffre-fort a été entièrement vidé. Vous repartez sur une page blanche.", "text-rose-300 bg-rose-950/40 border-rose-900/50");
+      }
     });
 
     async function runAnalysisAndSave() {
@@ -756,7 +770,7 @@
     weeklySummaryBtn.addEventListener('click', async () => {
       const records = await vault.getAllRecords();
       if (records.length === 0) { alert("Coffre-fort vide."); return; }
-      const summaryText = `Bilan de votre trajectoire (${records.length} instants ancrés) : Vos réflexions intègrent des analyses textuelles, vocales et visuelles de pointe. Votre écosystème souverain est pleinement opérationnel !`;
+      const summaryText = `Bilan de votre trajectoire (${records.length} instants ancrés) : Vos réflexions intègrent des analyses textuelles, vocales et visuelles de pointe via Moondream2. Écosystème souverain au sommet !`;
       appendChatMessage("Capsule Hebdomadaire 📊", summaryText, "text-emerald-300 bg-emerald-950/40 border-emerald-900/50");
     });
 
@@ -775,7 +789,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(records, null, 2));
       const a = document.createElement('a');
       a.href = dataStr;
-      a.download = `echomind_secure_vault_v7.1_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `echomind_secure_vault_v7.4_${new Date().toISOString().slice(0,10)}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
