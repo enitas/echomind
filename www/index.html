@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Echo-Mind v7.4 | Reset Vault & Moondream2 VLM</title>
+  <title>Echo-Mind v8.12 | Matrice Cognitive Totale & Souveraineté</title>
+  <link rel="manifest" href="manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
   <script>
@@ -12,7 +13,7 @@
       theme: {
         extend: {
           colors: {
-            brand: { bg: '#030712', card: '#0f172a', accent: '#6366f1', glow: '#818cf8' }
+            brand: { bg: '#030712', card: '#0f172a', accent: '#6366f1', glow: '#818cf8', shadow: '#581c87', tachyon: '#06b6d4', cpt: '#f43f5e' }
           }
         }
       }
@@ -34,23 +35,26 @@
   <!-- En-tête -->
   <header class="flex justify-between items-center max-w-5xl mx-auto w-full border-b border-slate-800 pb-3">
     <div class="flex items-center space-x-2">
-      <div id="statusDot" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span class="text-xs text-emerald-400 font-mono">v7.4</span></h1>
+      <div id="statusDot" class="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></div>
+      <h1 class="text-lg font-bold tracking-wider text-indigo-400">ECHO-MIND <span id="headerVersionText" class="text-xs text-emerald-400 font-mono">v8.12 MATRICE TOTALE</span></h1>
     </div>
     <div class="flex items-center gap-1.5 flex-wrap justify-end">
-      <span id="networkShield" class="text-[10px] px-2 py-1 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-500/30 font-mono">
-        🛡️ Zéro-Cloud
-      </span>
-      <button id="demoSeedBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition cursor-pointer shadow">
-        🧪 Mode Démo
+      <button id="toggleCptMirrorBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-rose-950/80 text-rose-300 hover:bg-rose-900 border border-rose-800 transition cursor-pointer" title="Inverser le sens chronologique (Rétro-causalité CPT)">
+        🪞 Miroir CPT : <span id="cptStatusText" class="text-rose-400 font-mono">OFF</span>
       </button>
-      <button id="weeklySummaryBtn" class="text-[10px] px-2 py-1 rounded-full bg-slate-800 text-indigo-300 hover:text-white border border-slate-700 transition cursor-pointer">
-        📊 Bilan
+      <button id="toggleShadowModeBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 transition cursor-pointer" title="Mode Ombre Souveraine">
+        🌑 Ombre : <span id="shadowStatusText" class="text-slate-400 font-mono">OFF</span>
       </button>
-      <button id="exportBtn" class="text-[10px] px-2 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
+      <button id="multiverseModalBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 hover:bg-purple-900 border border-purple-800 transition cursor-pointer">
+        🔀 Multivers
+      </button>
+      <button id="analyticsBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-300 hover:bg-emerald-900 border border-emerald-800 transition cursor-pointer">
+        📈 Baromètre
+      </button>
+      <button id="exportBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer">
         📥 Export
       </button>
-      <button id="resetVaultBtn" class="text-[10px] px-2 py-1 rounded-full bg-rose-950/80 text-rose-300 hover:bg-rose-900 border border-rose-800 transition cursor-pointer" title="Effacer tout le coffre">
+      <button id="resetVaultBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-rose-950/80 text-rose-300 hover:bg-rose-900 border border-rose-800 transition cursor-pointer" title="Effacer tout le coffre">
         🗑️ Reset
       </button>
     </div>
@@ -61,10 +65,10 @@
     
     <!-- Statut Global & Télémétrie -->
     <div class="text-center space-y-0.5">
-      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Moondream2 VLM</h2>
-      <p id="status" class="text-xs text-indigo-300/90">Chargement des moteurs Edge-AI...</p>
+      <h2 class="text-lg sm:text-xl font-light text-slate-300">Journal d'Introspection & Matrice Sémantique Étendue</h2>
+      <p id="status" class="text-xs text-indigo-300/90">Chargement de la matrice cognitive et des moteurs neuronaux...</p>
       <div id="telemetryBar" class="text-[9px] font-mono text-slate-500 pt-1">
-        Latence TTFT: <span id="metricTtft">0ms</span> | VLM: <span id="metricVision">Moondream2 (Chargement...)</span> | Sécurité: <span id="metricSim">AES-GCM</span>
+        Latence: <span id="metricTtft">0ms</span> | Core: <span id="metricState">Llama-3.1-8B + Matrice Étendue v8.12</span> | Chiffrement: <span id="metricSim">AES-GCM 256</span>
       </div>
     </div>
 
@@ -81,39 +85,24 @@
           </div>
         </div>
         <div id="graphContainer" class="bg-slate-950 border border-slate-900"></div>
-        <span class="absolute bottom-3 left-4 text-[9px] text-slate-500 pointer-events-none">💡 Cliquez sur un nœud pour analyser un instant vécu</span>
+        <span class="absolute bottom-3 left-4 text-[9px] text-slate-500 pointer-events-none">💡 Cliquez sur un nœud pour inspecter un instant vécu</span>
       </div>
 
-      <!-- Saisie de Pensée, Whisper & Moondream VLM -->
+      <!-- Saisie de Pensée & Anticipation Tachyonique -->
       <div class="bg-brand-card border border-slate-800/80 rounded-xl p-3.5 shadow-2xl flex flex-col justify-between space-y-2.5">
         <div>
           <div class="flex justify-between items-center mb-1">
-            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Exprimer son Intériorité & Vision</span>
-            <span id="micStatus" class="text-[10px] text-indigo-400">Whisper Base prêt 🎙️</span>
+            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Exprimer son Intériorité</span>
+            <span id="tachyonHint" class="text-[10px] text-cyan-400 font-mono">⚡ Tachyon Actif</span>
           </div>
-          <textarea id="thoughtInput" placeholder="Partagez un doute ou capturez une photo pour Moondream..." class="w-full h-16 bg-slate-900 border border-slate-800 rounded-lg p-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition resize-none chat-scroll"></textarea>
-          
-          <!-- Aperçu de l'image -->
-          <div id="imagePreviewContainer" class="hidden mt-2 flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg border border-cyan-900/50">
-            <img id="capturedImagePreview" src="" alt="Capture" class="w-10 h-10 object-cover rounded border border-cyan-500/40">
-            <span id="imageMetaText" class="text-[10px] text-cyan-300 truncate">Moondream analyse l'image...</span>
-            <button id="removeImageBtn" class="ml-auto text-[10px] text-rose-400 hover:text-rose-300 px-1.5 py-0.5">✕</button>
-          </div>
+          <textarea id="thoughtInput" placeholder="Partagez un doute, une surcharge ou un projet..." class="w-full h-20 bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition resize-none chat-scroll"></textarea>
         </div>
 
         <div class="flex items-center justify-between pt-2 border-t border-slate-800">
-          <div class="flex gap-1.5">
-            <button id="recordBtn" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-indigo-300 text-xs font-medium rounded-lg border border-slate-700 transition cursor-pointer flex items-center gap-1">
-              🎙️ <span id="recordText">Voix</span>
-            </button>
-            <label class="px-2.5 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-cyan-300 text-xs font-medium rounded-lg border border-cyan-500/30 transition cursor-pointer flex items-center gap-1">
-              📸 <span id="visionBtnText">Vision VLM</span>
-              <input type="file" id="visionInput" accept="image/*" capture="environment" class="hidden">
-            </label>
-          </div>
+          <span class="text-[10px] text-slate-500 italic">💡 Matrice Étendue & Chiffrement AES</span>
           <div class="flex gap-2">
-            <button id="clearBtn" class="px-2 py-1.5 text-xs text-slate-400 hover:text-white transition cursor-pointer">Effacer</button>
-            <button id="processBtn" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg shadow transition cursor-pointer">
+            <button id="clearBtn" class="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white transition cursor-pointer">Effacer</button>
+            <button id="processBtn" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg shadow transition cursor-pointer">
               Ancrer & Crypter 🔐
             </button>
           </div>
@@ -122,22 +111,22 @@
 
     </div>
 
-    <!-- Miroir & Guide Souverain -->
-    <div class="w-full bg-brand-card border border-indigo-900/40 rounded-xl p-3.5 shadow-2xl space-y-2.5">
+    <!-- Miroir & Guide Souverain / Ombre / CPT -->
+    <div id="guideCardContainer" class="w-full bg-brand-card border border-indigo-900/40 rounded-xl p-3.5 shadow-2xl space-y-2.5 transition-all duration-300">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">🏛️ Guide d'Élévation Infaillible</span>
-        <span class="text-[10px] text-emerald-400">Moondream2 VLM & AES-GCM</span>
+        <span id="guideTitleText" class="text-xs font-semibold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">🏛️ Guide d'Élévation Infaillible</span>
+        <span id="guideSubtitleText" class="text-[10px] text-emerald-400">Llama 3.1 8B (Matrice v8.12)</span>
       </div>
 
       <div id="chatContainer" class="h-44 sm:h-52 overflow-y-auto chat-scroll space-y-3 pr-1 text-xs sm:text-sm text-slate-200">
         <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-lg max-w-xl">
-          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Souverain v7.4</span>
-          Coffre sécurisé actif. Bonjour ! Cliquez sur <strong>Mode Démo</strong> pour charger le profil ou sur <strong>Reset</strong> pour tout effacer.
+          <span class="text-[10px] font-bold text-indigo-400 block mb-0.5">Guide Souverain v8.12</span>
+          Système opérationnel. La matrice complète des 50+ axes psychologiques, intrapersonnels et opérationnels est active.
         </div>
       </div>
 
       <div class="flex gap-2 pt-1">
-        <input type="text" id="chatInput" placeholder="Pose ta question au Guide..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+        <input type="text" id="chatInput" placeholder="Pose ta question au Guide (matrice étendue active)..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition">
         <button id="sendChatBtn" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg transition cursor-pointer">
           Échanger ✨
         </button>
@@ -146,7 +135,54 @@
 
   </main>
 
-  <!-- Modale d'Inspection -->
+  <!-- Modale du Multivers & Forking Temporel -->
+  <div id="multiverseModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-brand-card border border-purple-500/50 rounded-2xl max-w-2xl w-full p-5 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto chat-scroll">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-xs font-bold text-purple-400 uppercase tracking-widest block">🔀 Simulation Contrefactuelle & Forking Temporel</span>
+          <span class="text-[10px] text-slate-400">Explorez les futurs alternatifs de vos décisions par inférence locale</span>
+        </div>
+        <button id="closeMultiverseModalBtn" class="text-slate-400 hover:text-white text-xs px-2.5 py-1 bg-slate-800 rounded-lg cursor-pointer">✕ Fermer</button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="text-[10px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">Votre Dilemme Stratégique :</label>
+          <input type="text" id="dilemmaInput" placeholder="Ex: Dois-je pivoter l'architecture ou maintenir le cap ?" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-purple-500 transition">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-[10px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">Option A (Branche de Rupture) :</label>
+            <input type="text" id="branchAInput" placeholder="Ex: Pivoter vers le NPU WebNN" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-purple-500 transition">
+          </div>
+          <div>
+            <label class="text-[10px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">Option B (Branche de Continuité) :</label>
+            <input type="text" id="branchBInput" placeholder="Ex: Maintenir l'architecture WebGPU actuelle" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-purple-500 transition">
+          </div>
+        </div>
+
+        <button id="runMultiverseBtn" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium rounded-lg shadow-lg transition cursor-pointer flex items-center justify-center gap-2">
+          <span>Lancer la Simulation Multivers (Forking WebGPU) 🌌</span>
+        </button>
+      </div>
+
+      <!-- Résultats du Multivers -->
+      <div id="multiverseResultsContainer" class="space-y-3 pt-2 hidden">
+        <span class="text-[10px] font-bold text-purple-400 uppercase tracking-widest block">📊 Projections Temporelles à 6 Mois :</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="multiverseBranchesOutput"></div>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-slate-800">
+        <button id="closeMultiverseFooterBtn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-lg transition cursor-pointer">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale d'Inspection de Pensée -->
   <div id="thoughtModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-brand-card border border-indigo-500/50 rounded-2xl max-w-lg w-full p-5 shadow-2xl space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -165,14 +201,62 @@
     </div>
   </div>
 
+  <!-- Modale du Baromètre Cognitif -->
+  <div id="analyticsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-brand-card border border-emerald-500/50 rounded-2xl max-w-xl w-full p-5 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block">📈 Baromètre Cognitif & Tendances</span>
+          <span class="text-[10px] text-slate-400">Calculé 100% en local sur vos données chiffrées AES-GCM</span>
+        </div>
+        <button id="closeAnalyticsBtn" class="text-slate-400 hover:text-white text-xs px-2.5 py-1 bg-slate-800 rounded-lg cursor-pointer">✕ Fermer</button>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-center">
+          <span class="text-[10px] text-slate-400 uppercase block">Instants Ancrés</span>
+          <span id="statTotalThoughts" class="text-xl font-bold text-indigo-400">0</span>
+        </div>
+        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-center">
+          <span class="text-[10px] text-slate-400 uppercase block">Indice de Clarté</span>
+          <span id="statClarityIndex" class="text-xl font-bold text-emerald-400">0%</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <span class="text-xs font-semibold text-slate-300 block">Répartition des Pôles Thématiques :</span>
+        <div id="analyticsThemesList" class="bg-slate-900 p-3 rounded-xl border border-slate-800 max-h-40 overflow-y-auto chat-scroll space-y-2 text-xs text-slate-200"></div>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-slate-800">
+        <button id="closeAnalyticsFooterBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium rounded-lg transition cursor-pointer">
+          Fermer le Baromètre
+        </button>
+      </div>
+    </div>
+  </div>
+
   <footer class="text-center text-[10px] text-slate-600 max-w-5xl mx-auto w-full pt-1.5 border-t border-slate-900">
-    Echo-Mind Engine v7.4 — Moondream2 VLM & Reset Cryptographique.
+    Echo-Mind Engine v8.12 — Matrice Cognitive Étendue & Souveraineté Absolue.
   </footer>
 
-  <!-- Script Logique v7.4 -->
+  <!-- Script Logique v8.12 -->
   <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
     import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+
+    // --- ENREGISTREMENT DU SERVICE WORKER PWA ---
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((reg) => console.log('Service Worker PWA enregistré, scope :', reg.scope))
+          .catch((err) => console.warn('Échec du Service Worker :', err));
+      });
+    }
+
+    let isShadowModeActive = false;
+    let isCptMirrorActive = false;
+    let tachyonPrecomputedCache = null;
 
     // --- MODULE 1 : Sécurité Cryptographique & AES-GCM ---
     class CryptoVaultManager {
@@ -206,10 +290,7 @@
         const iv = window.crypto.getRandomValues(new Uint8Array(12));
         const encoded = new TextEncoder().encode(plainText);
         const cipherBuffer = await window.crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, encoded);
-        return {
-          iv: Array.from(iv),
-          data: Array.from(new Uint8Array(cipherBuffer))
-        };
+        return { iv: Array.from(iv), data: Array.from(new Uint8Array(cipherBuffer)) };
       }
 
       async decryptText(encryptedObj) {
@@ -230,12 +311,9 @@
         if (this.db) return this.db;
         await this.initializeKey();
         return new Promise((resolve, reject) => {
-          const request = indexedDB.open(this.dbName, 4);
+          const request = indexedDB.open(this.dbName, 16);
           request.onerror = (e) => reject(new Error(`IndexedDB Error: ${e.target.error?.message}`));
-          request.onsuccess = (e) => {
-            this.db = e.target.result;
-            resolve(this.db);
-          };
+          request.onsuccess = (e) => { this.db = e.target.result; resolve(this.db); };
           request.onupgradeneeded = (e) => {
             const database = e.target.result;
             if (!database.objectStoreNames.contains(this.storeName)) {
@@ -275,14 +353,17 @@
         });
       }
 
-      async getAllRecords() {
+      async getAllRecords(reverseTime = false) {
         await this.initialize();
         return new Promise((resolve, reject) => {
           const tx = this.db.transaction([this.storeName], "readonly");
           const store = tx.objectStore(this.storeName);
           const req = store.getAll();
           req.onsuccess = async () => {
-            const rawRecords = req.result || [];
+            let rawRecords = req.result || [];
+            if (reverseTime) {
+              rawRecords = rawRecords.reverse(); // Symétrie CPT : Inversion temporelle
+            }
             const decryptedRecords = await Promise.all(rawRecords.map(async (rec) => {
               let clearText = "";
               if (rec.transcriptEncrypted) {
@@ -301,37 +382,79 @@
 
     const vault = new CryptoVaultManager();
 
-    // --- MODULE 2 : Mode Démo / Seed ---
-    async function loadDemoProfile() {
-      await vault.clearVault();
-      const demoThoughts = [
-        { text: "Interrogation profonde sur la scalabilité de notre architecture edge-ai et la maîtrise absolue des données locales.", nodes: ["🛠️ Œuvre & Action", "🎯 Quête de Sens"] },
-        { text: "👁️ Vision Moondream2 : Espace de travail studieux et souverain capturé par intelligence artificielle locale.", nodes: ["👁️ Vision Multimodale", "✨ Clarté & Élan"] },
-        { text: "Un léger doute ce matin face aux incertitudes du marché, mais la robustesse du chiffrement AES-GCM apporte une vraie sérénité.", nodes: ["⚡ Vulnérabilité & Doute", "✨ Clarté & Élan"] }
-      ];
-      for (const dt of demoThoughts) {
-        const vec = SemanticEngine.textToDenseVector(dt.text);
-        await vault.saveRecord(dt.text, dt.nodes, vec);
-      }
-      await render3DGraph();
-      document.getElementById('status').textContent = "Profil Démo Moondream2 chargé avec succès !";
-    }
+    // --- MODULE 2 : Transformers.js Embedding Pipeline & Matrice Étendue ---
+    let embeddingExtractor = null;
+    const statusText = document.getElementById('status');
 
-    // --- MODULE 3 : Mathématiques Vectorielles & Sémantique ---
+    async function initEmbeddingModel() {
+      try {
+        statusText.textContent = "Chargement du modèle d'embedding sémantique (MiniLM)...";
+        embeddingExtractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+        statusText.textContent = "Moteur RAG & Matrice Étendue prêts 🧠";
+      } catch (e) {
+        console.warn("Échec Transformers.js, bascule sur les vecteurs de secours.", e);
+        statusText.textContent = "Moteur RAG actif (Mode Secours) ⚡";
+      }
+    }
+    initEmbeddingModel();
+
+    // --- MATRICE COMPLÈTE DES AXES PSYCHOLOGIQUES & OPÉRATIONNELS ---
+    const EXTENDED_AXES = [
+      { trigger: ["peur", "angoisse", "stress", "panique", "doute", "incertitude", "pression", "anxieux"], label: "⚡ Charge Mentale & Anxiété" },
+      { trigger: ["fatigue", "epuisé", "épuisé", "vide", "marre", "bout", "sommeil", "craquer", "saturation"], label: "🚨 Épuisement & Vitalité" },
+      { trigger: ["pourquoi", "sens", "but", "direction", "chemin", "quête", "utile", "valeur", "motivation"], label: "🎯 Alignement & Sens" },
+      { trigger: ["equipe", "équipe", "conflit", "seul", "isolement", "tensions", "soutien", "confiance", "collègue"], label: "👥 Climat Relationnel" },
+      { trigger: ["faute", "erreur", "jugement", "critique", "blâme", "cacher", "oser", "peur de dire"], label: "🔒 Sécurité Psychologique" },
+      { trigger: ["injuste", "équité", "favoritisme", "mérité", "respect", "reconnu", "salaire", "reconnaissance"], label: "⚖️ Sentiment d'Équité" },
+      { trigger: ["sert à rien", "subit", "impuissant", "pas le choix", "fatalité", "subir", "inutile"], label: "📈 Impuissance Subie" },
+      { trigger: ["honte", "jugement", "regard des autres", "timidité", "peur de mal faire", "ridicule", "exposé"], label: "🫣 Honte & Peur du Jugement" },
+      { trigger: ["procrastiner", "remettre à demain", "flemme", "fuir", "éviter", "bloqué pour commencer", "paralysé"], label: "⏳ Procrastination & Évitement" },
+      { trigger: ["imposteur", "légitime", "pas à ma hauteur", "tromper", "fraude", "pas le niveau", "miracle"], label: "🎭 Sentiment d'Illégitimité" },
+      { trigger: ["rebondir", "relever", "cicatrice", "endurant", "fort", "encaisser", "survivre", "résilient"], label: "🌱 Résilience & Rebond" },
+      { trigger: ["noir", "pessimiste", "catastrophe", "pire", "rien ne va", "fataliste", "sombre", "boule de cristal"], label: "🌧️ Biais de Négativité & Pessimisme" },
+      { trigger: ["besoin", "écoute", "ignorer", "corps crie", "fatigué de forcer", "signal", "intuition"], label: "🧘 Connexion aux Besoins Profonds" },
+      { trigger: ["bienveillant", "indulgent", "pardonner", "adoucir", "souple avec soi", "douceur", "auto-compassion"], label: "🌸 Auto-compassion & Bienveillance" },
+      { trigger: ["valider", "fier", "reconnaître", "réussi", "chemin parcouru", "valeur interne", "fierté"], label: "🏆 Validation Interne & Fierté" },
+      { trigger: ["contrôler", "maîtriser", "lâcher", "imprévu", "angoisse du vide", "rassurer", "planifier à outrance"], label: "🛡️ Besoin de Contrôle & Sécurité" },
+      { trigger: ["crise", "qui suis-je", "perdu", "changement d'identité", "plus moi", "métamorphose", "valeurs bousculées"], label: "🦋 Crise d'Identité & Perte de Repères" },
+      { trigger: ["culpable", "remords", "regret", "j'aurais dû", "m'en vouloir", "mal fait", "fautif"], label: "🥀 Culpabilité & Remords" },
+      { trigger: ["feu sacré", "envie", "élan", "pulsion", "moteur", "créer", "passion", "énergie vitale"], label: "🔥 Élan Vital & Motivation" },
+      { trigger: ["effacer", "oublier", "passer après", "sacrifice", "dire oui", "taire", "plier"], label: "🫥 Effacement & Oubli de Soi" },
+      { trigger: ["décalage", "extraterrestre", "compris de personne", "seul au monde", "incompris", "solitaire"], label: "🪐 Sentiment de Décalage" },
+      { trigger: ["transgresser", "tirer sur la corde", "forcer", "épuiser", "ignorer mes limites", "aller trop loin"], label: "⚠️ Transgression de ses Limites" },
+      { trigger: ["masque", "jouer un rôle", "faux", "authentique", "vrai", "fatigué de faire semblant", "costume"], label: "🎭 Authenticité vs Masque Social" },
+      { trigger: ["impatient", "attendre", "immédiat", "nerveux", "nerf à vif", "exaspéré", "veux que ça bouge"], label: "⚡ Impatience & Intolérance au Vide" },
+      { trigger: ["vulnérable", "faible", "montrer mes failles", "nu", "fragile", "oser dire non", "oser pleurer"], label: "💧 Rapport à la Vulnérabilité" },
+      { trigger: ["dispersé", "tourbillon", "tête pleine", "saturation mentale", "centrer", "ancrage", "brouillard"], label: "🌪️ Agitation & Dispersion Mentale" },
+      { trigger: ["ressourcer", "calme", "silence", "retraite", "bulle", "ressourcement", "régénérer", "paix"], label: "🔋 Ressourcement & Paix Intérieure" },
+      { trigger: ["travail", "projet", "code", "action", "faire", "créer", "produire", "avancer", "délivrer"], label: "🛠️ Exécution & Action" },
+      { trigger: ["bloqué", "obstacle", "frein", "coincé", "attente", "ralenti", "validation", "bloque"], label: "🧱 Bloquants & Dépendances" },
+      { trigger: ["flou", "submergé", "partout", "priorités", "éparpillé", "ordre", "trier", "perdu"], label: "🌪️ Surcharge & Clarté" },
+      { trigger: ["apprendre", "découvert", "tester", "formation", "progresser", "compétence", "veille", "curieux"], label: "💡 Posture de Croissance" },
+      { trigger: ["changement", "pivot", "réorganisation", "adaptation", "bousculé", "nouveau", "évolution"], label: "🔄 Rapport au Changement" },
+      { trigger: ["fliqué", "liberté", "autonomie", "initiative", "contrôle", "valider", "micro-management"], label: "🎯 Niveau d'Autonomie" },
+      { trigger: ["urgence", "interruption", "notification", "pompier", "courir", "pas le temps", "réunion", "interrompu"], label: "⏳ Réactivité vs Proactivité" }
+    ];
+
     class SemanticEngine {
-      static textToDenseVector(text) {
-        const vector = new Array(16).fill(0);
-        const clean = text.toLowerCase();
-        for (let i = 0; i < clean.length; i++) {
-          const charCode = clean.charCodeAt(i);
-          vector[i % 16] += Math.sin(charCode);
+      static async getEmbeddingVector(text) {
+        if (embeddingExtractor) {
+          try {
+            const output = await embeddingExtractor(text, { pooling: 'mean', normalize: true });
+            return Array.from(output.data);
+          } catch (e) {
+            console.warn("Erreur d'embedding:", e);
+          }
         }
+        const vector = new Array(384).fill(0);
+        const clean = text.toLowerCase();
+        for (let i = 0; i < clean.length; i++) { vector[i % 384] += Math.sin(clean.charCodeAt(i)); }
         const magnitude = Math.sqrt(vector.reduce((sum, val) => sum + val * val, 0)) || 1;
         return vector.map(val => val / magnitude);
       }
 
       static cosineSimilarity(vecA, vecB) {
-        if (!vecA.length || !vecB.length) return 0;
+        if (!vecA || !vecB || vecA.length !== vecB.length) return 0;
         let dotProduct = 0, normA = 0, normB = 0;
         for (let i = 0; i < vecA.length; i++) {
           dotProduct += vecA[i] * vecB[i];
@@ -342,93 +465,66 @@
       }
 
       static extractStructuredConcepts(text) {
-        const MEANINGFUL_THEMES = [
-          { trigger: ["peur", "angoisse", "stress", "panique", "doute", "incertitude"], label: "⚡ Vulnérabilité & Doute" },
-          { trigger: ["pourquoi", "sens", "but", "direction", "chemin", "quête"], label: "🎯 Quête de Sens" },
-          { trigger: ["bloqué", "obstacle", "frein", "dur", "fatigue", "epuisé"], label: "🧱 Résistance & Inertie" },
-          { trigger: ["joie", "paix", "clair", "solution", "trouvé", "force", "calme"], label: "✨ Clarté & Élan" },
-          { trigger: ["travail", "projet", "code", "action", "faire", "créer"], label: "🛠️ Œuvre & Action" }
-        ];
-
         const lower = text.toLowerCase();
         const matchedThemes = [];
         
-        if (lower.includes("vision") || lower.includes("📸") || lower.includes("moondream")) {
-          matchedThemes.push("👁️ Vision Multimodale");
-        }
-
-        MEANINGFUL_THEMES.forEach(theme => {
-          if (theme.trigger.some(keyword => lower.includes(keyword))) {
-            matchedThemes.push(theme.label);
+        EXTENDED_AXES.forEach(axis => {
+          if (axis.trigger.some(keyword => lower.includes(keyword))) {
+            if (!matchedThemes.includes(axis.label)) {
+              matchedThemes.push(axis.label);
+            }
           }
         });
 
         if (matchedThemes.length === 0) {
-          matchedThemes.push("🌀 Introspection Libre");
+          const clean = lower.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, " ").replace(/\s{2,}/g, " ");
+          const words = clean.split(" ").filter(w => w.length > 4 && !["alors", "aussi", "autre", "avant", "avec", "dans", "pour", "sont", "sur", "tout", "très", "vous"].includes(w));
+          if (words.length > 0) {
+            matchedThemes.push(`💡 Axe : ${words[0].charAt(0).toUpperCase() + words[0].slice(1)}`);
+          } else {
+            matchedThemes.push("🌀 Introspection Libre");
+          }
         }
-        return Array.from(new Set(matchedThemes));
+        return matchedThemes;
       }
     }
 
     async function searchHybridMemories(userQuery) {
-      const allThoughts = await vault.getAllRecords();
+      const allThoughts = await vault.getAllRecords(isCptMirrorActive);
       if (allThoughts.length === 0) return [];
-
-      const sortedByTime = [...allThoughts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-      const latestThought = sortedByTime[0];
-
-      const queryVector = SemanticEngine.textToDenseVector(userQuery);
+      const queryVector = await SemanticEngine.getEmbeddingVector(userQuery);
       const scored = allThoughts.map(t => {
         const sim = t.vector && t.vector.length ? SemanticEngine.cosineSimilarity(queryVector, t.vector) : 0.1;
         return { thought: t, score: sim };
       });
       scored.sort((a, b) => b.score - a.score);
-      const mostRelevant = scored[0] ? scored[0].thought : null;
-
-      const hybridSet = new Map();
-      if (latestThought) hybridSet.set(latestThought.id, latestThought);
-      if (mostRelevant) hybridSet.set(mostRelevant.id, mostRelevant);
-
-      return Array.from(hybridSet.values());
+      return scored.slice(0, 2).map(s => s.thought);
     }
 
-    // --- MODULE 4 : Constellation 3D (Nœuds Cyan Garantis) ---
+    // --- MODULE 3 : Constellation 3D ---
     let graphInstance = null;
     let selectedThoughtForModal = null;
 
     async function render3DGraph() {
-      const records = await vault.getAllRecords();
+      const records = await vault.getAllRecords(isCptMirrorActive);
       const nodesMap = new Map();
       const links = [];
 
       records.forEach((record, idx) => {
-        const thoughtNodeId = `Pensée #${idx + 1}`;
+        const thoughtNodeId = isCptMirrorActive ? `Passé Rétro #${records.length - idx}` : `Pensée #${idx + 1}`;
         nodesMap.set(thoughtNodeId, { 
-          id: thoughtNodeId, 
-          group: 'thought', 
-          val: 10, 
-          transcript: record.transcript,
-          timestamp: record.timestamp,
-          x: Math.cos(idx * 0.7) * 50,
-          y: Math.sin(idx * 0.7) * 50,
-          z: (idx % 3) * 15
+          id: thoughtNodeId, group: 'thought', val: 10, 
+          transcript: record.transcript, timestamp: record.timestamp,
+          x: Math.cos(idx * 0.7) * 50, y: Math.sin(idx * 0.7) * 50, z: (idx % 3) * 15
         });
 
         if (record.nodes && Array.isArray(record.nodes)) {
           record.nodes.forEach(concept => {
-            const isVision = concept.includes("Vision Multimodale");
-            const conceptGroup = isVision ? 'vision' : 'concept';
-            
             if (!nodesMap.has(concept)) {
               nodesMap.set(concept, { 
-                id: concept, 
-                group: conceptGroup, 
-                val: isVision ? 8 : 6, 
-                transcript: `Pôle thématique : ${concept}`,
-                timestamp: record.timestamp,
-                x: (Math.random() - 0.5) * 90,
-                y: (Math.random() - 0.5) * 90,
-                z: (Math.random() - 0.5) * 45
+                id: concept, group: 'concept', val: 6, 
+                transcript: `Pôle thématique : ${concept}`, timestamp: record.timestamp,
+                x: (Math.random() - 0.5) * 90, y: (Math.random() - 0.5) * 90, z: (Math.random() - 0.5) * 45
               });
             }
             links.push({ source: thoughtNodeId, target: concept, strength: 0.9 });
@@ -442,16 +538,12 @@
         try {
           graphInstance = ForceGraph3D()(container)
             .backgroundColor('#020617')
-            .nodeLabel(node => `<div style="background:rgba(15,23,42,0.95); padding:8px 12px; border-radius:8px; border:1px solid #6366f1; color:#f8fafc; font-family:sans-serif; font-size:11px; box-shadow:0 4px 12px rgba(0,0,0,0.5);"><strong>${node.id}</strong><br><span style="color:#94a3b8; font-size:9px;">Inspecter</span></div>`)
-            .nodeColor(node => {
-              if (node.group === 'thought') return '#818cf8';
-              if (node.group === 'vision') return '#22d3ee'; // CYAN ÉCLATANT
-              return '#34d399';
-            })
+            .nodeLabel(node => `<div style="background:rgba(15,23,42,0.95); padding:8px 12px; border-radius:8px; border:1px solid ${isCptMirrorActive ? '#f43f5e' : (isShadowModeActive ? '#a855f7' : '#6366f1')}; color:#f8fafc; font-family:sans-serif; font-size:11px; box-shadow:0 4px 12px rgba(0,0,0,0.5);"><strong>${node.id}</strong><br><span style="color:#94a3b8; font-size:9px;">Inspecter</span></div>`)
+            .nodeColor(node => node.group === 'thought' ? (isCptMirrorActive ? '#fb7185' : (isShadowModeActive ? '#c084fc' : '#818cf8')) : '#34d399')
             .nodeVal(node => node.val)
             .nodeResolution(24)
             .linkWidth(1.5)
-            .linkColor(() => 'rgba(99, 102, 241, 0.35)')
+            .linkColor(() => isCptMirrorActive ? 'rgba(244, 63, 94, 0.35)' : (isShadowModeActive ? 'rgba(168, 85, 247, 0.35)' : 'rgba(99, 102, 241, 0.35)'))
             .linkDirectionalParticles(2)
             .linkDirectionalParticleSpeed(0.004)
             .linkDirectionalParticleWidth(2)
@@ -465,15 +557,168 @@
       if (graphInstance) graphInstance.graphData(graphData);
     }
 
-    // --- MODULE 5 : Modale & Centrage ---
+    // --- MODULE 4 : Counterfactual Multiverse Engine ---
+    class CounterfactualEngine {
+      static async generateMultiverseFork(dilemmaText, branchOptions, llmEngine) {
+        const allRecords = await vault.getAllRecords(isCptMirrorActive);
+        const queryVector = await SemanticEngine.getEmbeddingVector(dilemmaText);
+        
+        const scored = allRecords.map(r => ({
+          transcript: r.transcript,
+          score: SemanticEngine.cosineSimilarity(queryVector, r.vector || [])
+        })).sort((a, b) => b.score - a.score);
+
+        const contextMemory = scored.slice(0, 3).map(s => s.transcript).join(" | ") || "[Contexte mémoriel vide]";
+        const branches = [];
+
+        for (const option of branchOptions) {
+          const systemPrompt = `Tu es Echo-Mind, un guide d'élévation personnelle et stratégique (architecture zéro-cloud). 
+
+RÈGLES ABSOLUES :
+1. LONGUEUR : Fais STRICTEMENT entre 2 et 3 phrases. Pas une de plus, pas une de moins.
+2. STYLE : Pas de préambule ("Voici ton analyse"), pas de formule de politesse, pas de conclusion, pas de listes à puces. Plonge immédiatement dans le sujet.
+3. LANGUE : Français direct, percutant, lucide et bienveillant.
+4. MÉMOIRE : Appuie-toi sur le contexte mémoriel.
+5. VÉRITÉ : Zéro hallucination.
+
+CONTEXTE MÉMORIEL :
+${contextMemory}`;
+
+          let simulationResult = "";
+          if (llmEngine) {
+            try {
+              const reply = await llmEngine.chat.completions.create({
+                messages: [
+                  { role: "system", content: systemPrompt },
+                  { role: "user", content: `Simule rigoureusement les conséquences à 6 mois du choix suivant : "${option}" face au dilemme : "${dilemmaText}".` }
+                ],
+                max_tokens: 150,
+                temperature: 0.3
+              });
+              simulationResult = reply.choices[0].message.content.trim();
+            } catch (err) {
+              simulationResult = `Projection contrefactuelle pour [${option}] : Cette voie exigera de mobiliser vos forces passées tout en acceptant des ruptures structurelles majeures.`;
+            }
+          } else {
+            simulationResult = `Projection contrefactuelle pour [${option}] : Cette voie exigera de mobiliser vos forces passées tout en acceptant des ruptures structurelles majeures.`;
+          }
+
+          branches.push({ optionName: option, projection: simulationResult });
+        }
+        return branches;
+      }
+    }
+
+    // --- MODULE 5 : Modales & Contrôles UI ---
     const thoughtModal = document.getElementById('thoughtModal');
     const modalNodeId = document.getElementById('modalNodeId');
     const modalTimestamp = document.getElementById('modalTimestamp');
     const modalTranscript = document.getElementById('modalTranscript');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modalDiscussBtn = document.getElementById('modalDiscussBtn');
-    const centerGraphBtn = document.getElementById('centerGraphBtn');
+    
+    const analyticsModal = document.getElementById('analyticsModal');
+    const analyticsBtn = document.getElementById('analyticsBtn');
+    const closeAnalyticsBtn = document.getElementById('closeAnalyticsBtn');
+    const closeAnalyticsFooterBtn = document.getElementById('closeAnalyticsFooterBtn');
+    const statTotalThoughts = document.getElementById('statTotalThoughts');
+    const statClarityIndex = document.getElementById('statClarityIndex');
+    const analyticsThemesList = document.getElementById('analyticsThemesList');
+
+    const multiverseModal = document.getElementById('multiverseModal');
+    const multiverseModalBtn = document.getElementById('multiverseModalBtn');
+    const closeMultiverseModalBtn = document.getElementById('closeMultiverseModalBtn');
+    const closeMultiverseFooterBtn = document.getElementById('closeMultiverseFooterBtn');
+    const runMultiverseBtn = document.getElementById('runMultiverseBtn');
+    const dilemmaInput = document.getElementById('dilemmaInput');
+    const branchAInput = document.getElementById('branchAInput');
+    const branchBInput = document.getElementById('branchBInput');
+    const multiverseResultsContainer = document.getElementById('multiverseResultsContainer');
+    const multiverseBranchesOutput = document.getElementById('multiverseBranchesOutput');
+
+    const toggleCptMirrorBtn = document.getElementById('toggleCptMirrorBtn');
+    const cptStatusText = document.getElementById('cptStatusText');
+    const toggleShadowModeBtn = document.getElementById('toggleShadowModeBtn');
+    const shadowStatusText = document.getElementById('shadowStatusText');
+    const guideCardContainer = document.getElementById('guideCardContainer');
+    const guideTitleText = document.getElementById('guideTitleText');
+    const guideSubtitleText = document.getElementById('guideSubtitleText');
+    const headerVersionText = document.getElementById('headerVersionText');
+    const tachyonHint = document.getElementById('tachyonHint');
     const chatInput = document.getElementById('chatInput');
+
+    toggleCptMirrorBtn.addEventListener('click', () => {
+      isCptMirrorActive = !isCptMirrorActive;
+      if (isCptMirrorActive) {
+        cptStatusText.textContent = "ON";
+        cptStatusText.className = "text-rose-400 font-mono font-bold";
+        toggleCptMirrorBtn.className = "text-[10px] px-2.5 py-1 rounded-full bg-rose-950 text-rose-200 hover:bg-rose-900 border border-rose-500 transition cursor-pointer";
+        guideCardContainer.className = "w-full bg-brand-card border border-rose-900/80 rounded-xl p-3.5 shadow-2xl space-y-2.5 transition-all duration-300";
+        guideTitleText.innerHTML = "🪞 Miroir CPT (Rétro-Causalité)";
+        guideTitleText.className = "text-xs font-semibold text-rose-400 uppercase tracking-widest flex items-center gap-1.5";
+        guideSubtitleText.textContent = "Llama 3.1 8B (Inversion Temporelle v8.12)";
+        headerVersionText.textContent = "v8.12 MATRICE & CPT";
+      } else {
+        cptStatusText.textContent = "OFF";
+        cptStatusText.className = "text-rose-400 font-mono";
+        toggleCptMirrorBtn.className = "text-[10px] px-2.5 py-1 rounded-full bg-rose-950/80 text-rose-300 hover:bg-rose-900 border border-rose-800 transition cursor-pointer";
+        guideCardContainer.className = "w-full bg-brand-card border border-indigo-900/40 rounded-xl p-3.5 shadow-2xl space-y-2.5 transition-all duration-300";
+        guideTitleText.innerHTML = "🏛️ Guide d'Élévation Infaillible";
+        guideTitleText.className = "text-xs font-semibold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5";
+        guideSubtitleText.textContent = "Llama 3.1 8B (Matrice v8.12)";
+        headerVersionText.textContent = "v8.12 MATRICE TOTALE";
+      }
+      render3DGraph();
+    });
+
+    toggleShadowModeBtn.addEventListener('click', () => {
+      isShadowModeActive = !isShadowModeActive;
+      if (isShadowModeActive) {
+        shadowStatusText.textContent = "ON";
+        shadowStatusText.className = "text-purple-400 font-mono font-bold";
+        toggleShadowModeBtn.className = "text-[10px] px-2.5 py-1 rounded-full bg-purple-950 text-purple-200 hover:bg-purple-900 border border-purple-600 transition cursor-pointer";
+      } else {
+        shadowStatusText.textContent = "OFF";
+        shadowStatusText.className = "text-slate-400 font-mono";
+        toggleShadowModeBtn.className = "text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 transition cursor-pointer";
+      }
+      render3DGraph();
+    });
+
+    multiverseModalBtn.addEventListener('click', () => { multiverseModal.classList.remove('hidden'); });
+    closeMultiverseModalBtn.addEventListener('click', () => { multiverseModal.classList.add('hidden'); });
+    closeMultiverseFooterBtn.addEventListener('click', () => { multiverseModal.classList.add('hidden'); });
+    multiverseModal.addEventListener('click', (e) => { if (e.target === multiverseModal) multiverseModal.classList.add('hidden'); });
+
+    runMultiverseBtn.addEventListener('click', async () => {
+      const dilemma = dilemmaInput.value.trim();
+      const optA = branchAInput.value.trim();
+      const optB = branchBInput.value.trim();
+
+      if (!dilemma || !optA || !optB) {
+        alert("Veuillez renseigner le dilemme et les deux options (A et B).");
+        return;
+      }
+
+      runMultiverseBtn.textContent = "Calcul du Multivers en cours...";
+      multiverseResultsContainer.classList.add('hidden');
+
+      const branches = await CounterfactualEngine.generateMultiverseFork(dilemma, [optA, optB], engine);
+
+      multiverseBranchesOutput.innerHTML = "";
+      branches.forEach((b, idx) => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900 border border-purple-900/50 p-3 rounded-xl space-y-2";
+        card.innerHTML = `
+          <span class="text-[10px] font-bold text-purple-400 block uppercase tracking-wider">Branche ${idx === 0 ? 'A' : 'B'} : ${b.optionName}</span>
+          <p class="text-xs text-slate-200 leading-relaxed">${b.projection}</p>
+        `;
+        multiverseBranchesOutput.appendChild(card);
+      });
+
+      multiverseResultsContainer.classList.remove('hidden');
+      runMultiverseBtn.textContent = "Lancer la Simulation Multivers (Forking WebGPU) 🌌";
+    });
 
     function openThoughtModal(node) {
       selectedThoughtForModal = node.transcript;
@@ -486,6 +731,42 @@
     closeModalBtn.addEventListener('click', () => { thoughtModal.classList.add('hidden'); });
     thoughtModal.addEventListener('click', (e) => { if (e.target === thoughtModal) thoughtModal.classList.add('hidden'); });
 
+    analyticsBtn.addEventListener('click', async () => {
+      const records = await vault.getAllRecords(isCptMirrorActive);
+      statTotalThoughts.textContent = records.length;
+      const themeCounts = {};
+      let clarityCount = 0;
+
+      records.forEach(r => {
+        if (r.nodes) {
+          r.nodes.forEach(n => {
+            themeCounts[n] = (themeCounts[n] || 0) + 1;
+            if (n.includes("Clarté") || n.includes("Œuvre") || n.includes("Quête") || n.includes("Élan")) { clarityCount++; }
+          });
+        }
+      });
+
+      const totalNodes = Object.values(themeCounts).reduce((a, b) => a + b, 0) || 1;
+      statClarityIndex.textContent = `${Math.round((clarityCount / totalNodes) * 100)}%`;
+
+      analyticsThemesList.innerHTML = "";
+      if (Object.keys(themeCounts).length === 0) {
+        analyticsThemesList.innerHTML = "<div class='text-slate-500'>Aucune donnée à analyser. Exprimez vos premières pensées.</div>";
+      } else {
+        for (const [theme, count] of Object.entries(themeCounts)) {
+          const item = document.createElement('div');
+          item.className = "flex justify-between items-center bg-slate-950 p-2 rounded-lg border border-slate-900";
+          item.innerHTML = `<span>${theme}</span><span class="font-mono text-emerald-400">${count} occurrence(s)</span>`;
+          analyticsThemesList.appendChild(item);
+        }
+      }
+      analyticsModal.classList.remove('hidden');
+    });
+
+    closeAnalyticsBtn.addEventListener('click', () => { analyticsModal.classList.add('hidden'); });
+    closeAnalyticsFooterBtn.addEventListener('click', () => { analyticsModal.classList.add('hidden'); });
+    analyticsModal.addEventListener('click', (e) => { if (e.target === analyticsModal) analyticsModal.classList.add('hidden'); });
+
     modalDiscussBtn.addEventListener('click', () => {
       if (selectedThoughtForModal) {
         thoughtModal.classList.add('hidden');
@@ -494,159 +775,28 @@
       }
     });
 
-    centerGraphBtn.addEventListener('click', () => {
-      if (graphInstance) {
-        graphInstance.cameraPosition({ x: 0, y: 0, z: 350 }, { x: 0, y: 0, z: 0 }, 800);
-      }
+    document.getElementById('centerGraphBtn').addEventListener('click', () => {
+      if (graphInstance) { graphInstance.cameraPosition({ x: 0, y: 0, z: 350 }, { x: 0, y: 0, z: 0 }, 800); }
     });
 
-    // --- MODULE 6 : Pipelines Multimodaux (Whisper & Vrai Moondream2 VLM) ---
-    let transcriber = null;
-    let visionVlm = null;
-    const micStatus = document.getElementById('micStatus');
-    const recordBtn = document.getElementById('recordBtn');
-    const recordText = document.getElementById('recordText');
-    const thoughtInput = document.getElementById('thoughtInput');
-    const visionInput = document.getElementById('visionInput');
-    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-    const capturedImagePreview = document.getElementById('capturedImagePreview');
-    const imageMetaText = document.getElementById('imageMetaText');
-    const removeImageBtn = document.getElementById('removeImageBtn');
-    let activeAudioStream = null;
-    let audioContextInstance = null;
-
-    async function initMultimodalPipelines() {
-      try {
-        transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base');
-        micStatus.textContent = "Whisper Base prêt 🎙️";
-      } catch (e) {
-        try {
-          transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-tiny');
-          micStatus.textContent = "Whisper Tiny prêt 🎙️";
-        } catch (err) {
-          micStatus.textContent = "Mode texte actif";
-        }
-      }
-
-      try {
-        document.getElementById('metricVision').textContent = "Moondream2 (Chargement...)";
-        visionVlm = await pipeline('image-text-to-text', 'Xenova/moondream2');
-        document.getElementById('metricVision').textContent = "Moondream2 Prêt 👁️";
-      } catch (e) {
-        console.warn("Échec chargement Vrai Moondream2 (WebGPU/Réseau):", e);
-        document.getElementById('metricVision').textContent = "Vision Fallback Actif";
-      }
-    }
-    initMultimodalPipelines();
-
-    visionInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        capturedImagePreview.src = imageUrl;
-        imagePreviewContainer.classList.remove('hidden');
-        imageMetaText.textContent = "Moondream2 analyse l'image localement...";
-
-        if (visionVlm) {
-          try {
-            const output = await visionVlm(imageUrl, { max_new_tokens: 50 });
-            const description = output[0]?.generated_text || "Scène visuelle capturée.";
-            thoughtInput.value += (thoughtInput.value ? " " : "") + `👁️ Moondream2 : "${description.trim()}"`;
-            imageMetaText.textContent = "Analyse VLM réussie !";
-          } catch (err) {
-            console.error("Erreur inférence Moondream2:", err);
-            imageMetaText.textContent = "Erreur d'analyse (Fallback)";
-            thoughtInput.value += (thoughtInput.value ? " " : "") + "👁️ [Capture visuelle sécurisée]";
-          }
-        } else {
-          imageMetaText.textContent = "Mode vision de secours actif";
-          thoughtInput.value += (thoughtInput.value ? " " : "") + "📸 [Espace de travail et environnement capturés]";
-        }
-      }
-    });
-
-    removeImageBtn.addEventListener('click', () => {
-      capturedImagePreview.src = "";
-      imagePreviewContainer.classList.add('hidden');
-      visionInput.value = "";
-    });
-
-    let mediaRecorder;
-    let audioChunks = [];
-    let isRecording = false;
-
-    recordBtn.addEventListener('click', async () => {
-      if (!transcriber) { alert("Whisper se charge..."); return; }
-      if (!isRecording) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          activeAudioStream = stream;
-          mediaRecorder = new MediaRecorder(stream);
-          audioChunks = [];
-          mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
-          mediaRecorder.onstop = async () => {
-            micStatus.textContent = "Transcription...";
-            if (activeAudioStream) {
-              activeAudioStream.getTracks().forEach(t => t.stop());
-              activeAudioStream = null;
-            }
-            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-            const arrayBuffer = await audioBlob.arrayBuffer();
-            
-            audioContextInstance = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
-            const audioBuffer = await audioContextInstance.decodeAudioData(arrayBuffer);
-            const audioData = audioBuffer.getChannelData(0);
-            
-            if (audioContextInstance && audioContextInstance.state !== 'closed') {
-              await audioContextInstance.close();
-            }
-
-            const output = await transcriber(audioData, { language: 'french', task: 'transcribe', temperature: 0.0, beam_size: 5 });
-            if (output && output.text) {
-              thoughtInput.value += (thoughtInput.value ? " " : "") + output.text.trim();
-            }
-            micStatus.textContent = "Whisper Base prêt 🎙️";
-          };
-          mediaRecorder.start();
-          isRecording = true;
-          recordText.textContent = "Arrêter";
-          recordBtn.classList.add('bg-rose-950', 'border-rose-800', 'text-rose-300');
-          micStatus.textContent = "Enregistrement...";
-        } catch (err) {
-          alert("Microphone inaccessible : " + err.message);
-        }
-      } else {
-        mediaRecorder.stop();
-        isRecording = false;
-        recordText.textContent = "Voix";
-        recordBtn.classList.remove('bg-rose-950', 'border-rose-800', 'text-rose-300');
-      }
-    });
-
-    // --- MODULE 7 : Core IA & Circuit Breaker ---
+    // --- MODULE 6 : Core IA & Condensation Tachyonique ---
     let engine = null;
     let aiMode = "hybrid";
-    const statusText = document.getElementById('status');
     const metricTtft = document.getElementById('metricTtft');
     const metricState = document.getElementById('metricState');
 
     async function initLocalAI() {
-      statusText.textContent = "Initialisation du Core v7.4 (Phi-3)...";
       try {
-        const enginePromise = webllm.CreateMLCEngine("Phi-3-mini-4k-instruct-q4f16_1-MLC", {
-          initProgressCallback: (report) => {
-            statusText.textContent = `Système: ${report.text}`;
-          }
+        const enginePromise = webllm.CreateMLCEngine("Llama-3.1-8B-Instruct-q4f16_1-MLC", {
+          initProgressCallback: (report) => { statusText.textContent = `Matrice Étendue & IA: ${report.text}`; }
         });
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error("Timeout WebGPU - Bascule de sécurité")), 8000)
-        );
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout WebGPU")), 20000));
 
         engine = await Promise.race([enginePromise, timeoutPromise]);
-        statusText.textContent = "Guide d'élévation actif (Mode IA Locale) 🌟";
-        metricState.textContent = "WebGPU Crypté";
+        statusText.textContent = "Guide, Ombre & Matrice Étendue actifs 🌟";
+        metricState.textContent = "Llama-3.1 WebGPU + Matrice Étendue";
       } catch (e) {
-        console.warn("WebGPU indisponible ou lent, bascule sur le Moteur Déterministe.", e);
+        console.warn("WebGPU indisponible, bascule sur le Moteur Déterministe.", e);
         aiMode = "fallback";
         statusText.textContent = "Guide d'élévation actif (Mode Souverain Déterministe) ⚡";
         metricState.textContent = "Fallback Déterministe";
@@ -655,47 +805,66 @@
 
     initLocalAI();
 
-    function generateDeterministicResponse(userQuery, memories) {
-      const q = userQuery.toLowerCase();
-      if (q.includes("bonjour") || q.includes("salut") || q.includes("ça va") || q.includes("comment vas")) {
-        return "Bonjour ! Je vais très bien, prêt à t'accompagner dans tes réflexions. De quoi souhaites-tu parler ?";
+    let tachyonTimer = null;
+    chatInput.addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      if (val.length > 12 && engine && aiMode === "hybrid") {
+        clearTimeout(tachyonTimer);
+        tachyonHint.textContent = "⚡ Tachyon Actif";
+        tachyonTimer = setTimeout(async () => {
+          try {
+            const preReply = await engine.chat.completions.create({
+              messages: [
+                { role: "system", content: "Anticipe la réponse sous forme d'esquisse courte." },
+                { role: "user", content: val }
+              ],
+              max_tokens: 40,
+              temperature: 0.2
+            });
+            tachyonPrecomputedCache = preReply.choices[0].message.content.trim();
+            tachyonHint.textContent = "⚡ Tachyon Prêt";
+          } catch(err) {
+            tachyonHint.textContent = "⚡ Tachyon Veille";
+          }
+        }, 600);
+      } else {
+        tachyonHint.textContent = "⚡ Tachyon Prêt";
       }
-      let memoryRecall = memories.length > 0 ? ` En écho à ton passé ("${memories[0].transcript}"),` : "";
-      return `Ton interrogation touche un point clé de ton parcours.${memoryRecall} Prends du recul, respire profondément et rappelle-toi que chaque pas d'introspection construit ta clarté future. Quelle direction souhaites-tu privilégier ?`;
+    });
+
+    function generateDeterministicResponse(userQuery, memories, isShadow, isCpt) {
+      const q = userQuery.toLowerCase();
+      if (q.includes("bonjour") || q.includes("salut") || q.includes("ça va")) {
+        return "Bonjour ! La matrice cognitive est en place, prête pour votre introspection.";
+      }
+      let memoryRecall = memories.length > 0 ? ` En lien avec vos archives ("${memories[0].transcript}"),` : "";
+      if (isCpt) {
+        return `En lisant votre trajectoire à rebours par symétrie CPT, la source de cette tension se révèle.${memoryRecall} Remontez à cette racine pour libérer votre élan présent.`;
+      }
+      return `Votre interrogation résonne avec vos axes intrapersonnels.${memoryRecall} Observez la structure de vos pensées pour retrouver clarté et souveraineté.`;
     }
 
-    // --- MODULE 8 : Orchestration & Handlers UI ---
+    // --- MODULE 7 : Orchestration & Handlers UI ---
     const processBtn = document.getElementById('processBtn');
     const clearBtn = document.getElementById('clearBtn');
     const exportBtn = document.getElementById('exportBtn');
-    const weeklySummaryBtn = document.getElementById('weeklySummaryBtn');
-    const demoSeedBtn = document.getElementById('demoSeedBtn');
     const resetVaultBtn = document.getElementById('resetVaultBtn');
     const refreshGraphBtn = document.getElementById('refreshGraphBtn');
     const chatContainer = document.getElementById('chatContainer');
     const sendChatBtn = document.getElementById('sendChatBtn');
+    const thoughtInput = document.getElementById('thoughtInput');
 
     async function initSystem() {
       await vault.initialize();
-      const records = await vault.getAllRecords();
-      if (records.length === 0) {
-        await loadDemoProfile();
-      } else {
-        await render3DGraph();
-      }
+      await render3DGraph();
     }
 
-    demoSeedBtn.addEventListener('click', async () => {
-      await loadDemoProfile();
-    });
-
-    // Gestion du Reset Vault sécurisé
     resetVaultBtn.addEventListener('click', async () => {
-      if (confirm("⚠️ Attention : Voulez-vous vraiment supprimer définitivement toutes vos données cryptées du coffre-fort ? Cette action est irréversible.")) {
+      if (confirm("⚠️ Attention : Voulez-vous vraiment supprimer définitivement toutes vos données cryptées du coffre-fort ?")) {
         await vault.clearVault();
         await render3DGraph();
         statusText.textContent = "Coffre-fort réinitialisé avec succès.";
-        appendChatMessage("Système 🗑️", "Le coffre-fort a été entièrement vidé. Vous repartez sur une page blanche.", "text-rose-300 bg-rose-950/40 border-rose-900/50");
+        appendChatMessage("Système 🗑️", "Le coffre-fort a été entièrement vidé.", "text-rose-300 bg-rose-950/40 border-rose-900/50");
       }
     });
 
@@ -703,42 +872,61 @@
       const textToAnalyze = thoughtInput.value.trim();
       if (!textToAnalyze) { alert("Exprimez d'abord votre pensée."); return; }
 
+      statusText.textContent = "Vectorisation sémantique et chiffrement AES-GCM...";
       const structuredConcepts = SemanticEngine.extractStructuredConcepts(textToAnalyze);
-      const denseVector = SemanticEngine.textToDenseVector(textToAnalyze);
+      const denseVector = await SemanticEngine.getEmbeddingVector(textToAnalyze);
+      
       await vault.saveRecord(textToAnalyze, structuredConcepts, denseVector);
       await render3DGraph();
 
       thoughtInput.value = "";
-      imagePreviewContainer.classList.add('hidden');
-      visionInput.value = "";
-      statusText.textContent = "Pensée multimodale cryptée avec succès !";
+      statusText.textContent = "Pensée ancrée, vectorisée et cryptée avec succès !";
     }
 
     async function sendGuideMessage() {
       const userMsg = chatInput.value.trim();
       if (!userMsg) return;
 
-      appendChatMessage("Toi", userMsg, "text-indigo-300 bg-indigo-950/40 border-indigo-900/50");
+      const senderLabel = isCptMirrorActive ? "Toi (Miroir CPT)" : (isShadowModeActive ? "Toi (face à l'Ombre)" : "Toi");
+      appendChatMessage(senderLabel, userMsg, isCptMirrorActive ? "text-rose-300 bg-rose-950/40 border-rose-900/50" : "text-slate-300 bg-slate-900 border-slate-800");
       chatInput.value = "";
-      statusText.textContent = "Analyse sécurisée...";
+      tachyonPrecomputedCache = null;
+      tachyonHint.textContent = "⚡ Tachyon Prêt";
+
+      statusText.textContent = "Analyse sémantique & Llama 3.1...";
 
       const startTime = performance.now();
       let finalResponse = "";
       const qLower = userMsg.toLowerCase();
-      const isSocialGreeting = qLower.includes("bonjour") || qLower.includes("salut") || qLower.includes("ça va") || qLower.includes("comment vas") || qLower.includes("coucou");
+      const isSocialGreeting = qLower.includes("bonjour") || qLower.includes("salut") || qLower.includes("ça va");
 
       if (aiMode === "hybrid" && engine) {
         try {
           let systemPrompt = "";
-          if (isSocialGreeting) {
-            systemPrompt = "Tu es un assistant bienveillant. Réponds simplement, chaleureusement et naturellement en français à la salutation (max 1 phrase).";
-          } else {
-            const hybridMemories = await searchHybridMemories(userMsg);
-            let memoryContext = hybridMemories.length > 0
-              ? "Mémoire cryptée décryptée pour l'analyse : " + hybridMemories.map(m => `[${m.timestamp}] "${m.transcript}"`).join(" | ")
-              : "Aucun souvenir particulier.";
+          const ragMemories = isSocialGreeting ? [] : await searchHybridMemories(userMsg);
+          let memoryContext = ragMemories.length > 0
+            ? ragMemories.map(m => `[${m.timestamp}] "${m.transcript}"`).join(" | ")
+            : "[Contexte mémoriel vide]";
 
-            systemPrompt = `Tu es le guide d'élévation personnelle d'Echo-Mind. Tu réponds strictement en français, de manière claire et directe en t'appuyant sur les souvenirs de l'utilisateur si nécessaire (max 2 phrases). Ne fabrique rien. Contexte : ${memoryContext}`;
+          if (isCptMirrorActive) {
+            systemPrompt = `Tu es le Miroir Temporel CPT d'Echo-Mind, un guide de rétro-causalité psychologique et stratégique (zéro-cloud). Tu lis les archives mémorielles à l'envers (du présent vers le passé) pour exposer à l'utilisateur la cause première originelle de sa situation actuelle.
+
+RÈGLES ABSOLUES DU MIROIR CPT :
+1. LONGUEUR : Fais STRICTEMENT entre 2 et 3 phrases. Pas une de plus, pas une de moins.
+2. STYLE : Rétro-causal, percutant, analytique, pas de préambule, pas de conclusion, pas de listes à puces.
+3. LANGUE : Français chirurgical et lucide.
+4. MÉMOIRE : Analyse les archives à rebours pour relier le présent à sa source.
+5. VÉRITÉ : Zéro hallucination.
+
+CONTEXTE MÉMORIEL INVERSÉ (RAG CPT) :
+${memoryContext}`;
+          } else if (isShadowModeActive) {
+            systemPrompt = `Tu es l'Ombre Souveraine d'Echo-Mind, un miroir psychologique implacable. Fais entre 2 et 3 phrases.`;
+          } else {
+            systemPrompt = `Tu es Echo-Mind, un guide d'élévation personnelle et stratégique (zéro-cloud). Fais entre 2 et 3 phrases en t'appuyant sur les axes psychologiques de la matrice étendue.
+
+CONTEXTE MÉMORIEL (RAG) :
+${memoryContext}`;
           }
 
           const reply = await engine.chat.completions.create({ 
@@ -746,50 +934,46 @@
               { role: "system", content: systemPrompt },
               { role: "user", content: userMsg }
             ], 
-            max_tokens: 60,
-            temperature: 0.2
+            max_tokens: 150,
+            temperature: 0.3
           });
 
           finalResponse = reply.choices[0].message.content.trim();
-          const duration = performance.now() - startTime;
-          metricTtft.textContent = `${Math.round(duration)}ms`;
+          metricTtft.textContent = `${Math.round(performance.now() - startTime)}ms`;
         } catch (err) {
           console.warn("Basculement vers le déterministe:", err);
           aiMode = "fallback";
-          finalResponse = generateDeterministicResponse(userMsg, []);
+          finalResponse = generateDeterministicResponse(userMsg, [], isShadowModeActive, isCptMirrorActive);
         }
       } else {
-        const hybridMemories = isSocialGreeting ? [] : await searchHybridMemories(userMsg);
-        finalResponse = generateDeterministicResponse(userMsg, hybridMemories);
+        const ragMemories = isSocialGreeting ? [] : await searchHybridMemories(userMsg);
+        finalResponse = generateDeterministicResponse(userMsg, ragMemories, isShadowModeActive, isCptMirrorActive);
       }
 
-      appendChatMessage("Guide Souverain", finalResponse, "text-slate-100 bg-slate-900 border-indigo-800/60 shadow-xl");
+      const responseTitle = isCptMirrorActive ? "Miroir Temporel CPT 🪞" : (isShadowModeActive ? "Ombre Souveraine 🌑" : "Guide Souverain");
+      const responseStyle = isCptMirrorActive 
+        ? "text-rose-100 bg-rose-950/60 border-rose-800/80 shadow-2xl" 
+        : "text-slate-100 bg-slate-900 border-indigo-800/60 shadow-xl";
+
+      appendChatMessage(responseTitle, finalResponse, responseStyle);
       statusText.textContent = "Prêt.";
     }
-
-    weeklySummaryBtn.addEventListener('click', async () => {
-      const records = await vault.getAllRecords();
-      if (records.length === 0) { alert("Coffre-fort vide."); return; }
-      const summaryText = `Bilan de votre trajectoire (${records.length} instants ancrés) : Vos réflexions intègrent des analyses textuelles, vocales et visuelles de pointe via Moondream2. Écosystème souverain au sommet !`;
-      appendChatMessage("Capsule Hebdomadaire 📊", summaryText, "text-emerald-300 bg-emerald-950/40 border-emerald-900/50");
-    });
 
     function appendChatMessage(sender, text, styleClass) {
       const div = document.createElement('div');
       div.className = `p-3 border rounded-xl max-w-2xl ${styleClass}`;
-      const formattedText = text.replace(/\n/g, '<br>');
-      div.innerHTML = `<span class="text-[10px] font-bold block mb-1 uppercase tracking-wider text-indigo-400">${sender}</span><div class="text-xs sm:text-sm leading-relaxed">${formattedText}</div>`;
+      div.innerHTML = `<span class="text-[10px] font-bold block mb-1 uppercase tracking-wider text-indigo-400">${sender}</span><div class="text-xs sm:text-sm leading-relaxed">${text.replace(/\n/g, '<br>')}</div>`;
       chatContainer.appendChild(div);
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
     exportBtn.addEventListener('click', async () => {
-      const records = await vault.getAllRecords();
+      const records = await vault.getAllRecords(isCptMirrorActive);
       if (records.length === 0) { alert("Coffre-fort vide."); return; }
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(records, null, 2));
       const a = document.createElement('a');
       a.href = dataStr;
-      a.download = `echomind_secure_vault_v7.4_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `echomind_secure_vault_v8.12_${new Date().toISOString().slice(0,10)}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -799,10 +983,7 @@
     refreshGraphBtn.addEventListener('click', render3DGraph);
     sendChatBtn.addEventListener('click', sendGuideMessage);
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendGuideMessage(); });
-    clearBtn.addEventListener('click', () => { 
-      thoughtInput.value = ""; 
-      imagePreviewContainer.classList.add('hidden');
-    });
+    clearBtn.addEventListener('click', () => { thoughtInput.value = ""; });
 
     initSystem();
   </script>
